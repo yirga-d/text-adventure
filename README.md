@@ -33,7 +33,7 @@ Norden: Schlosseingang
 
 Inhalt Gebäudeplan 
 
- 
+ -
 
 Schlosseingang muss mit Rammbock geöffnet werden 
 
@@ -41,7 +41,7 @@ Norden: Saal
 
 Inhalt Lampe 
 
- 
+ -
 
 Saal 
 
@@ -53,7 +53,7 @@ Westen: Prinzessinraum
 
 Osten: Schmiede 
 
- 
+ -
 
 Schmiede 
 
@@ -61,7 +61,7 @@ Inhalt: Truhe -> enthält besseres Schwert und Verbandkasten
 
 Westen: Saal 
 
- 
+ -
 
 Prinzessinraum: 
 
