@@ -1,0 +1,9 @@
+﻿namespace knight_text_adventure;
+
+static class Program
+{
+    static void Main()
+    {
+        Console.WriteLine("Hello World!");
+    }
+}
