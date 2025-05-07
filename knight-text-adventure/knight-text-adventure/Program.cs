@@ -1,4 +1,7 @@
-﻿namespace knight_text_adventure;
+﻿using knight_text_adventure.Persons;
+using knight_text_adventure.Items;
+
+namespace knight_text_adventure;
 
 static class Program
 {
