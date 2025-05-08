@@ -1,16 +1,16 @@
-using System.Xml.Linq;
-using knight_text_adventure.Items;
-
-public class Map : Item
+namespace knight_text_adventure.Items
 {
-
-    public Map(string name) : base(name)
+    public class Map : Item
     {
-        Name = name;
-    }
 
-    public override void Use()
-    {
-        Console.WriteLine("Keine Ahnung");
+        public Map(string name) : base(name)
+        {
+            Name = name;
+        }
+
+        public override void Use()
+        {
+            Console.WriteLine("Keine Ahnung");
+        }
     }
 }

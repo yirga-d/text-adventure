@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace knight_text_adventure.NPC
+namespace knight_text_adventure.Persons
 {
     public class Protagonist : Person
     {
@@ -72,7 +72,7 @@ namespace knight_text_adventure.NPC
 
         public void Use(Item item)
         {
-            Item.Use(item);
+            //Item.Use(item);
         }
 
         //Walk() needs RoomInformation to work, so it remains unfinished for now

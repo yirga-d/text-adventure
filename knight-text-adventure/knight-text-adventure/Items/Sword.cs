@@ -1,4 +1,4 @@
-namespace knight_text_adventure.Items;
+namespace knight_text_adventure.Items
 {
     public class Sword : Item
     {

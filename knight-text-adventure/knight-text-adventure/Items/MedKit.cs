@@ -1,18 +1,18 @@
-using System.Xml.Linq;
-using knight_text_adventure.Items;
-
-public class Medkit : Item
+namespace knight_text_adventure.Items
 {
-    public int HP { get; set; }
-
-    public Medkit(int hp, string name) : base(name)
+    public class Medkit : Item
     {
-        Name = name;
-        HP = hp;
-    }
+        public int HP { get; set; }
 
-    public override void Use()
-    {
-        Console.WriteLine("+++++++HP");
+        public Medkit(int hp, string name) : base(name)
+        {
+            Name = name;
+            HP = hp;
+        }
+
+        public override void Use()
+        {
+            Console.WriteLine("+++++++HP");
+        }
     }
 }

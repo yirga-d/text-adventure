@@ -1,20 +1,20 @@
-namespace knight_text_adventure.Items;
-
-
-public class Item
+namespace knight_text_adventure.Items
 {
-    protected string Name { get; set; }
-
-    public Item(string name)
+    public class Item
     {
-        Name = name;
+        protected string Name { get; set; }
+
+        public Item(string name)
+        {
+            Name = name;
+        }
+
+        public virtual void Use() { }
+
+        public bool Equals(Item obj)
+        {
+            return this.Name == obj.Name;
+        }
+
     }
-
-    public virtual void Use() { }
-
-    public new bool Equals(Item obj)
-    {
-        return this.Name == obj.Name;
-    }
-
 }
