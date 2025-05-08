@@ -9,7 +9,7 @@ public class Person
     //The List contains threat up -> down -> left -> right
     public List<bool> Threat { get; set; }
 
-    public virtual void Attack(string direction)
+    public virtual void Attack(string direction, bool fire = false)
     {
     }
 }
@@ -25,7 +25,7 @@ public class Protagonist : Person
         Inventory = inventory;
     }
 
-    public override void Attack(string direction)
+    public override void Attack(string direction, bool fire = false)
     {
         
     }
@@ -67,7 +67,7 @@ public class Protagonist : Person
     {
         if (Inventory.Count() >= 2)
         {
-            Console.WriteLine($"Inventory is already full.\n Drop an item to pick up {item}");
+            Console.WriteLine($"Inventory is already full.\n Drop an item to pick up {item.Name}");
             return false;
         }
 
@@ -77,10 +77,13 @@ public class Protagonist : Person
 
     public void Use(Item item)
     {
-        Item.Use(item);
+        if (Protagonist.Inventory.Contains(item))
+        {
+            Item.Use(item);
+        }
     }
 
-    //Walk() needs RoomInformation to work, so it remains unfinished for now
+    //Walk() needs Room Information to work, so it remains unfinished for now
     public bool Walk(String enteredDirection = "")
     {
         string chosenRoom;
@@ -99,5 +102,23 @@ public class Protagonist : Person
         }
 
         return true;
+    }
+}
+
+public class Npc : Person
+{
+    public bool IsAlive { get; set; }
+    
+
+    public Npc(string name, int hp)
+    {
+        Name = name;
+        Hp = hp;
+        IsAlive = true;
+    }
+
+    public override void Attack(string direction, bool fire = false)
+    {
+        
     }
 }
