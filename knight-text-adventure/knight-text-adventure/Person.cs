@@ -27,7 +27,7 @@ public class Protagonist : Person
 
     public override void Attack(string direction, bool fire = false)
     {
-        
+
     }
 
     public bool Block(string direction, string threatDirection, bool fire)
@@ -39,7 +39,7 @@ public class Protagonist : Person
 
         return direction == threatDirection && !fire;
     }
-    
+
     public bool Dodge(string direction, string threatDirection)
     {
         string correctDodgeDirection = threatDirection switch
@@ -108,7 +108,6 @@ public class Protagonist : Person
 public class Npc : Person
 {
     public bool IsAlive { get; set; }
-    
 
     public Npc(string name, int hp)
     {
@@ -119,6 +118,6 @@ public class Npc : Person
 
     public override void Attack(string direction, bool fire = false)
     {
-        
+
     }
 }
