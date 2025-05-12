@@ -1,28 +1,24 @@
 ﻿using knight_text_adventure.Items;
-using knight_text_adventure.Persons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using knight_text_adventure.Location;
 
 namespace knight_text_adventure.Persons
 {
     public class Protagonist : Person
     {
         public List<Item> Inventory { get; set; }
+        
+        public Room Room { get; set; }
 
-        public Protagonist(string name, int hp, List<Item> inventory)
+        public Protagonist(string name, int hp, List<Item> inventory, Room startRoom)
         {
             Name = name;
             Hp = hp;
             Inventory = inventory;
+            Room = startRoom;
         }
 
-        public override void Attack(string direction)
+        public override void Attack(string direction, bool fire = false)
         {
-
         }
 
         public bool Block(string direction, string threatDirection, bool fire)
@@ -43,7 +39,7 @@ namespace knight_text_adventure.Persons
                 "Down" => "Up",
                 "Left" => "Right",
                 "Right" => "Left",
-                _ => "cheat"
+                _ => "Invalid"
             };
             if (direction != correctDodgeDirection)
             {
@@ -60,9 +56,9 @@ namespace knight_text_adventure.Persons
 
         public bool Take(Item item)
         {
-            if (Inventory.Count() >= 2)
+            if (Inventory.Count >= 2)
             {
-                Console.WriteLine($"Inventory is already full.\n Drop an item to pick up {item}");
+                Console.WriteLine($"Inventory is already full.\n Drop an item to pick up {item.Name}");
                 return false;
             }
 
@@ -72,13 +68,16 @@ namespace knight_text_adventure.Persons
 
         public void Use(Item item)
         {
-            //Item.Use(item);
+            if (Protagonist.Inventory.Contains(item))
+            {
+                item.Use();
+            }
         }
 
-        //Walk() needs RoomInformation to work, so it remains unfinished for now
-        public bool Walk(string enteredDirection = "")
+        //Walk() needs Room Information to work, so it remains unfinished for now
+        public bool Walk(String enteredDirection = "")
         {
-            string chosenRoom;
+            var startRoom = Room;
             string direction = enteredDirection.ToUpper().First() switch
             {
                 'N' => "North",
@@ -90,6 +89,21 @@ namespace knight_text_adventure.Persons
 
             if (direction == "none")
             {
+                return false;
+            }
+
+            foreach (var neighbor in Room.Neighbors)
+            {
+                if (direction == neighbor.Key)
+                {
+                    Room = neighbor.Value;
+                    break;
+                }
+            }
+
+            if (Room == startRoom)
+            {
+                Console.WriteLine("Foreach loop never did anything :(");
                 return false;
             }
 

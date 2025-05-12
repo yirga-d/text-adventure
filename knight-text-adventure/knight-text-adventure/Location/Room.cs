@@ -12,9 +12,9 @@ namespace knight_text_adventure.Location
 
         public Item[]? Content { get; set; }
 
-        public NPC? NPCs  { get; set; }
+        public Npc? NPCs  { get; set; }
 
-        private Dictionary<string, Room> Neighbors = new();
+        public Dictionary<string, Room> Neighbors = new();
 
         public Room(string name, bool locked = false)
         {
@@ -36,7 +36,7 @@ namespace knight_text_adventure.Location
             }
         }
 
-        public void AddNPCs(NPC npc)
+        public void AddNPCs(Npc npc)
         {
             NPCs = npc;
         }

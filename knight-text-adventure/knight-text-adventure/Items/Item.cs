@@ -2,7 +2,7 @@ namespace knight_text_adventure.Items
 {
     public class Item
     {
-        protected string Name { get; set; }
+        public string Name { get; set; }
 
         public Item(string name)
         {
