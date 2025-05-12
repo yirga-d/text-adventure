@@ -1,6 +1,5 @@
 using knight_text_adventure.Items;
 using knight_text_adventure.Persons;
-using System.IO.Pipes;
 
 namespace knight_text_adventure.Location
 {
@@ -8,18 +7,21 @@ namespace knight_text_adventure.Location
     {
         public string Name { get; set; }
 
-        private bool IsLocked {  get; set; }
+        private bool IsLighting { get; set; }
+
+        private bool IsLocked { get; set; }
 
         public Item[]? Content { get; set; }
 
-        public NPC? NPCs  { get; set; }
+        public NPC? NPCs { get; set; }
 
         private Dictionary<string, Room> Neighbors = new();
 
-        public Room(string name, bool locked = false)
+        public Room(string name, bool locked = false, bool isLighting = true)
         {
             Name = name;
             IsLocked = locked;
+            IsLighting = isLighting;
         }
 
         public void AddNeighborRoom(string direction, Room room)//
@@ -52,10 +54,19 @@ namespace knight_text_adventure.Location
             {
                 Console.WriteLine("Bsch....");
                 IsLocked = false;
-                Console.WriteLine("The was is open");
+                Console.WriteLine("The way is open");
                 return;
             }
             Console.WriteLine("The room is already open");
+        }
+
+        public void TurnOnTheLight()
+        {
+            if(!IsLighting && NPCs != null) 
+            {
+                Console.WriteLine("Oh no! Hier the enemy!");
+                //NPCs.Attack();
+            }
         }
     }
 }
