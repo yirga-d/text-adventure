@@ -72,7 +72,7 @@ namespace knight_text_adventure.Persons
 
         public void Use(Item item)
         {
-            //Item.Use(item);
+            item.Use();
         }
 
         //Walk() needs RoomInformation to work, so it remains unfinished for now
