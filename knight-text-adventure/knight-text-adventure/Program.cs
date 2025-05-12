@@ -1,10 +1,14 @@
-﻿namespace knight_text_adventure;
-
-static class Program
+﻿namespace knight_text_adventure
 {
-    static void Main()
+    static class Program
     {
-        Console.WriteLine("Hello World!");
-        Protagonist protagonist = new Protagonist("Knight Cornelius", 3, [Item.StandardSword]);
+
+        static void Main()
+        {
+            //Console.WriteLine("Hello World!");
+            //Protagonist protagonist = new Protagonist("Knight Cornelius", 3, [Item.StandardSword]);
+
+
+        }
     }
 }
