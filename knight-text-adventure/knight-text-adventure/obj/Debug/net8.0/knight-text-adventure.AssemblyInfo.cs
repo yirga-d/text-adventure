@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("knight-text-adventure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec1cd385852eae8e76fd149c981f460e2b3b0b03")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a2cd410a89c38347da2e6a11aa2f10790c29203c")]
 [assembly: System.Reflection.AssemblyProductAttribute("knight-text-adventure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("knight-text-adventure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
