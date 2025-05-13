@@ -5,7 +5,7 @@ namespace knight_text_adventure.Persons
 {
     public class Protagonist : Person
     {
-        public List<Item> Inventory { get; set; }
+        public static List<Item> Inventory { get; set; }
         
         public Room Room { get; set; }
 
@@ -68,7 +68,7 @@ namespace knight_text_adventure.Persons
 
         public void Use(Item item)
         {
-            if (Protagonist.Inventory.Contains(item))
+            if (Inventory.Contains(item))
             {
                 item.Use();
             }
