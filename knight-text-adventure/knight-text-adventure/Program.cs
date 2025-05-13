@@ -1,5 +1,6 @@
 ﻿using knight_text_adventure.Items;
 using knight_text_adventure.Location;
+using knight_text_adventure.Persons;
 
 namespace knight_text_adventure
 {
@@ -9,13 +10,8 @@ namespace knight_text_adventure
         static void Main()
         {
             //Console.WriteLine("Hello World!");
-            //Protagonist protagonist = new Protagonist("Knight Cornelius", 3, [Item.StandardSword]);
-            
             InitializeRoomsAndNeighbors();
-        }
 
-        static void InitializeRoomsAndNeighbors()
-        {
             Item sword = new Sword(3, "simple sword");
             Item swordBetter = new Sword(6, "better sword");
             Item medkit = new Medkit(3, "medkit");
@@ -30,36 +26,41 @@ namespace knight_text_adventure
             Room throneRoom = new Room("Throne Room");
 
             forest.AddNeighborRoom("North", castleGrounds);
-            Console.WriteLine();
-            forest.PrintNeighbors();
 
             castleGrounds.AddNeighborRoom("North", castleEntrance);
             castleGrounds.AddNeighborRoom("South", forest);
             castleGrounds.AddNeighborRoom("West", workshop);
-            castleGrounds.PrintNeighbors();
-            Console.WriteLine();
-            
+
             workshop.AddNeighborRoom("East", castleGrounds);
-            
+
             castleEntrance.AddNeighborRoom("North", hall);
             castleEntrance.AddNeighborRoom("South", castleGrounds);
-            Console.WriteLine();
-            castleEntrance.PrintNeighbors();
-            
+
             hall.AddNeighborRoom("East", forge);
             hall.AddNeighborRoom("South", castleEntrance);
             hall.AddNeighborRoom("West", throneRoom);
-            Console.WriteLine();
-            hall.PrintNeighbors();
-            
-            throneRoom.AddNeighborRoom("East", hall);
-            Console.WriteLine();
-            throneRoom.PrintNeighbors();
-            
-            forge.AddNeighborRoom("West", hall);
-            forge.PrintNeighbors();
 
-            Console.WriteLine("DONE");
+            throneRoom.AddNeighborRoom("East", hall);
+
+            forge.AddNeighborRoom("West", hall);
+
+            Console.WriteLine("Initialization complete!");
+            Protagonist protagonist = new Protagonist("Knight Cornelius", 3, [sword], castleGrounds);
+            Console.WriteLine($"Your name is {protagonist.Name} and you are currently in {protagonist.Room.Name}");
+            protagonist.Room.PrintNeighbors();
+            
+            Console.WriteLine("Enter a command:");
+            string? command = Console.ReadLine();
+            if (command == "Walk North")
+            {
+                protagonist.Walk("North");
+            }
+            
+            protagonist.Room.PrintNeighbors();
+        }
+
+        static void InitializeRoomsAndNeighbors()
+        {
         }
     }
 }
