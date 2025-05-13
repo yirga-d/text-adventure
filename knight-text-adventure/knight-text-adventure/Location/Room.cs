@@ -29,12 +29,12 @@ namespace knight_text_adventure.Location
             Neighbors.Add(direction, room);
         }
 
-        public void GetNeighbors()
+        public void PrintNeighbors()
         {
             Console.WriteLine($"You're in the {this.Name}");
             foreach (var neighbor in Neighbors)
             {
-                Console.WriteLine($"{neighbor.Value.Name} to the {neighbor.Key.ToString()}");
+                Console.WriteLine($"{neighbor.Key.ToString()}: {neighbor.Value.Name}");
             }
         }
 
