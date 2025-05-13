@@ -1,4 +1,11 @@
 ﻿using knight_text_adventure.Items;
+using knight_text_adventure.Persons;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 using knight_text_adventure.Location;
 
 namespace knight_text_adventure.Persons

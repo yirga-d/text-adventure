@@ -1,6 +1,5 @@
 using knight_text_adventure.Items;
 using knight_text_adventure.Persons;
-using System.IO.Pipes;
 
 namespace knight_text_adventure.Location
 {
@@ -8,7 +7,9 @@ namespace knight_text_adventure.Location
     {
         public string Name { get; set; }
 
-        private bool IsLocked {  get; set; }
+        private bool IsLighting { get; set; }
+
+        private bool IsLocked { get; set; }
 
         public Item[]? Content { get; set; }
 
@@ -16,10 +17,11 @@ namespace knight_text_adventure.Location
 
         public Dictionary<string, Room> Neighbors = new();
 
-        public Room(string name, bool locked = false)
+        public Room(string name, bool locked = false, bool isLighting = true)
         {
             Name = name;
             IsLocked = locked;
+            IsLighting = isLighting;
         }
 
         public void AddNeighborRoom(string direction, Room room)//
@@ -27,12 +29,12 @@ namespace knight_text_adventure.Location
             Neighbors.Add(direction, room);
         }
 
-        public void GetNeighbors()
+        public void PrintNeighbors()
         {
             Console.WriteLine($"You're in the {this.Name}");
             foreach (var neighbor in Neighbors)
             {
-                Console.WriteLine($"{neighbor.Value.Name} to the {neighbor.Key.ToString()}");
+                Console.WriteLine($"{neighbor.Key.ToString()}: {neighbor.Value.Name}");
             }
         }
 
@@ -52,10 +54,19 @@ namespace knight_text_adventure.Location
             {
                 Console.WriteLine("Bsch....");
                 IsLocked = false;
-                Console.WriteLine("The was is open");
+                Console.WriteLine("The way is open");
                 return;
             }
             Console.WriteLine("The room is already open");
+        }
+
+        public void TurnOnTheLight()
+        {
+            if(!IsLighting && NPCs != null) 
+            {
+                Console.WriteLine("Oh no! Hier the enemy!");
+                //NPCs.Attack();
+            }
         }
     }
 }
