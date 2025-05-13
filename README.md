@@ -3,7 +3,8 @@ Repo for a knight/castle text-adventure as a school project
 
 ![image](https://github.com/user-attachments/assets/f06683a7-907e-47b5-8f41-73fd764a967a)
 
-![image](https://github.com/user-attachments/assets/58bd4988-ba99-4b8e-8cf9-4cffd63463e7)
+![image](https://github.com/user-attachments/assets/539464dc-389e-4623-b381-857d3c4deae5)
+
 
 Detaillierter Ablauf: 
 
