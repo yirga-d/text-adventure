@@ -5,6 +5,8 @@ namespace knight_text_adventure.Location
 {
     public class Room
     {
+        private readonly string[] Direction = new string[] {"North", "South", "East", "West"};
+
         public string Name { get; set; }
 
         private bool IsLighting { get; set; }
@@ -26,7 +28,12 @@ namespace knight_text_adventure.Location
 
         public void AddNeighborRoom(string direction, Room room)//
         {
-            Neighbors.Add(direction, room);
+            if (Direction.Contains(direction))
+            {
+                Neighbors.Add(direction, room);
+                return;
+            }
+            //error
         }
 
         public void PrintNeighbors()

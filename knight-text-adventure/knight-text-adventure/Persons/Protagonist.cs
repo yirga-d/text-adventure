@@ -61,6 +61,11 @@ namespace knight_text_adventure.Persons
             Inventory.Remove(item);
         }
 
+        private void Heal(object hp)
+        {
+            Hp += (int)hp;
+        }
+
         public bool Take(Item item)
         {
             if (Inventory.Count >= 2)
@@ -70,6 +75,11 @@ namespace knight_text_adventure.Persons
             }
 
             Inventory.Add(item);
+            if (item is Medkit)
+            {
+                Medkit objeckt = (Medkit)item;
+                objeckt.MedKitUsing += Heal;
+            }
             return true;
         }
 
