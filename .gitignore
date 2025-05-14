@@ -1,2 +1,5 @@
 knight-text-adventure/knight-text-adventure.sln.DotSettings.user
 knight-text-adventure/knight-text-adventure/obj
+/.vs
+/knight-text-adventure/.vs
+/knight-text-adventure/knight-text-adventure/bin/Debug/net8.0
