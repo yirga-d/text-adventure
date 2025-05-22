@@ -6,7 +6,7 @@ namespace knight_text_adventure.Persons
     {
         public string Name { get; set; }
 
-        public static int Hp { get; set; }
+        public int Hp { get; set; }
         
         public Room Room { get; set; }
         

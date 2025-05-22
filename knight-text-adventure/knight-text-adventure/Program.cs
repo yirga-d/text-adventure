@@ -9,7 +9,7 @@ namespace knight_text_adventure
 
         static void Main()
         {
-            //Console.WriteLine("Hello World!");
+            Console.Clear();
 
             Item sword = new Sword(3, "simple sword");
             Item swordBetter = new Sword(6, "better sword");
@@ -50,14 +50,13 @@ namespace knight_text_adventure
             Console.Write("The castle of the princess has been attacked. \n" +
                               "As a knight, it is your responsibility to save the princess out of danger.\n" +
                               "Choose a name:");
-            string chosenName =  "Knight " + Console.ReadLine() ?? "Knight Jeff";
+            string chosenName =  "Knight " + Console.ReadLine();
 
             Protagonist protagonist = new Protagonist(chosenName, 3, [sword], castleGrounds);
             
             Console.WriteLine($"Your name is {protagonist.Name}. The Castle of the princess has been attacked.");
 
-            bool dead = false;
-            while (!dead)
+            while (protagonist.Hp > 0)
             {
                 protagonist.Room.PrintNeighbors();
 
@@ -74,7 +73,7 @@ namespace knight_text_adventure
                 Console.Clear();
                 if (isValidCommand)
                 {
-                    MethodTrigger.TriggerMethod(protagonist, commandString, commandParams);
+                    InputProcesser.TriggerMethod(protagonist, commandString, commandParams);
                 }
                 else
                 {
