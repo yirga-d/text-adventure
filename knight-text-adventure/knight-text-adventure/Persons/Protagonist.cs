@@ -14,8 +14,6 @@ namespace knight_text_adventure.Persons
     {
         public static List<Item> Inventory { get; set; }
         
-        public Room Room { get; set; }
-
         public Protagonist(string name, int hp, List<Item> inventory, Room startRoom)
         {
             Name = name;
@@ -24,11 +22,12 @@ namespace knight_text_adventure.Persons
             Room = startRoom;
         }
 
-        public override void Attack(string direction, bool fire = false)
+        public override void Attack(char direction, bool fire = false)
         {
+            Console.WriteLine("Attacking " + Room.Npcs?.Name);
         }
 
-        public bool Block(string direction, string threatDirection, bool fire)
+        public bool Block(char direction, char threatDirection, bool fire)
         {
             if (direction != threatDirection || fire)
             {
@@ -38,15 +37,15 @@ namespace knight_text_adventure.Persons
             return direction == threatDirection && !fire;
         }
 
-        public bool Dodge(string direction, string threatDirection)
+        public bool Dodge(char direction, char threatDirection)
         {
-            string correctDodgeDirection = threatDirection switch
+            char correctDodgeDirection = threatDirection switch
             {
-                "Up" => "Down",
-                "Down" => "Up",
-                "Left" => "Right",
-                "Right" => "Left",
-                _ => "Invalid"
+                'U' => 'D',
+                'D' => 'D',
+                'L' => 'R',
+                'R' => 'L',
+                _ => '0'
             };
             if (direction != correctDodgeDirection)
             {
@@ -81,7 +80,6 @@ namespace knight_text_adventure.Persons
             }
         }
 
-        //Walk() needs Room Information to work, so it remains unfinished for now
         public bool Walk(String enteredDirection = "")
         {
             var startRoom = Room;
@@ -110,7 +108,7 @@ namespace knight_text_adventure.Persons
 
             if (Room == startRoom)
             {
-                Console.WriteLine("Foreach loop never did anything :(");
+                Console.WriteLine($"There's no room to the {enteredDirection} of you.");
                 return false;
             }
 

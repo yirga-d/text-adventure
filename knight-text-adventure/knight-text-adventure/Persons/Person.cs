@@ -1,3 +1,5 @@
+using knight_text_adventure.Location;
+
 namespace knight_text_adventure.Persons
 {
     public class Person
@@ -5,11 +7,10 @@ namespace knight_text_adventure.Persons
         public string Name { get; set; }
 
         public static int Hp { get; set; }
-
-        //The List contains threat up -> down -> left -> right
-        public List<bool> Threat { get; set; }
-
-        public virtual void Attack(string direction, bool fire = false)
+        
+        public Room Room { get; set; }
+        
+        public virtual void Attack(char direction, bool fire = false)
         {
         }
     }
