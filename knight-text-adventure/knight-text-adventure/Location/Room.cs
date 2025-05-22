@@ -13,7 +13,7 @@ namespace knight_text_adventure.Location
 
         public Item[]? Content { get; set; }
 
-        public Npc? NPCs  { get; set; }
+        public Npc? Npcs { get; set; }
 
         public Dictionary<string, Room> Neighbors = new();
 
@@ -24,14 +24,14 @@ namespace knight_text_adventure.Location
             IsLighting = isLighting;
         }
 
-        public void AddNeighborRoom(string direction, Room room)//
+        public void AddNeighborRoom(string direction, Room room)
         {
             Neighbors.Add(direction, room);
         }
 
         public void PrintNeighbors()
         {
-            Console.WriteLine($"You're in the {this.Name}");
+            Console.WriteLine($"You've just entered the {Name}");
             foreach (var neighbor in Neighbors)
             {
                 Console.WriteLine($"{neighbor.Key.ToString()}: {neighbor.Value.Name}");
@@ -40,7 +40,7 @@ namespace knight_text_adventure.Location
 
         public void AddNPCs(Npc npc)
         {
-            NPCs = npc;
+            Npcs = npc;
         }
 
         public void AddItems(params Item[] items)
@@ -57,12 +57,13 @@ namespace knight_text_adventure.Location
                 Console.WriteLine("The way is open");
                 return;
             }
+
             Console.WriteLine("The room is already open");
         }
 
         public void TurnOnTheLight()
         {
-            if(!IsLighting && NPCs != null) 
+            if (!IsLighting && Npcs != null)
             {
                 Console.WriteLine("Oh no! Hier the enemy!");
                 //NPCs.Attack();
