@@ -76,7 +76,9 @@ namespace knight_text_adventure
                 }
                 else
                 {
-                    Console.WriteLine("Invalid Input");
+                    Console.WriteLine(
+                        "Invalid Input. Enter \"info\" and your command (e.g. \"info walk\") for instructions \n" +
+                        "or simply enter \"info\" for a general user manual.");
                 }
             }
 

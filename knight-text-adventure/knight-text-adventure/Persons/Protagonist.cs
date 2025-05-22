@@ -12,7 +12,7 @@ namespace knight_text_adventure.Persons
 {
     public class Protagonist : Person
     {
-        public static List<Item> Inventory { get; set; }
+        public List<Item> Inventory { get; set; }
 
         public Protagonist(string name, int hp, List<Item> inventory, Room startRoom)
         {

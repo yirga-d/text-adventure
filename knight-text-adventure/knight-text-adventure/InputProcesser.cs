@@ -28,7 +28,7 @@ public class InputProcesser
 
         if (commandLower is "dodge" or "attack")
         {
-            if (ValidAttackBlockDodgeParams.Contains(param.ToUpper().First()) == false)
+            if (ValidAttackDodgeParams.Contains(param.ToUpper().First()) == false)
             {
                 return false;
             }
@@ -37,6 +37,14 @@ public class InputProcesser
         if (commandLower is "drop" or "use")
         {
             if (ValidDropUseParams.Contains(param.ToLower()) == false)
+            {
+                return false;
+            }
+        }
+
+        if (commandLower is "info")
+        {
+            if (ValidCommands.Contains(param.ToLower()) == false && param != "nonsense")
             {
                 return false;
             }
@@ -65,7 +73,7 @@ public class InputProcesser
                 break;
             case "drop" or "use":
                 Item? chosenItem = null;
-                foreach (var item in Protagonist.Inventory)
+                foreach (var item in protagonist.Inventory)
                 {
                     if (item.Name == commandParamString.ToLower())
                     {
@@ -89,13 +97,59 @@ public class InputProcesser
                 }
 
                 break;
+            case "info":
+                PrintUserManual(protagonist, commandParamString);
+                break;
             case "walk":
                 protagonist.Walk(commandParamString);
                 break;
             default:
-                Console.WriteLine("Command not recognized.");
+                Console.WriteLine(
+                    "Command not recognized. Displaying this text here to the user should have been avoided by CheckIsValidCommand.");
                 break;
         }
+    }
+
+    public static void PrintUserManual(Protagonist protagonist, string requestedMethod)
+    {
+        Console.Clear();
+        switch (requestedMethod.ToLower())
+        {
+            case "attack":
+            case "dodge":
+                Console.WriteLine(
+                    $"The {requestedMethod} command can be used with any direction (Up/Down/Left/Right).");
+                break;
+            case "block":
+                Console.WriteLine("The Block command doesn't accept any arguments. Simply enter \"Block\" to block.");
+                break;
+            case "drop":
+            case "use":
+                Console.WriteLine($"The {requestedMethod} command can be used with any item in your inventory:");
+                foreach (var item in protagonist.Inventory)
+                {
+                    Console.WriteLine("Drop/Use " + item.Name);
+                }
+
+                break;
+            case "take":
+                Console.WriteLine("The take command can be used with any item in your current room.");
+                break;
+            case "walk":
+                Console.WriteLine("The walk command can be used with any direction (North/East/South/West).");
+                break;
+            default:
+                Console.WriteLine("Valid commands are:");
+                foreach (string command in ValidCommands)
+                {
+                    Console.WriteLine(command);
+                }
+
+                break;
+        }
+
+        Console.WriteLine("Press enter to continue with the game.");
+        Console.ReadLine();
     }
 
     private static readonly List<string> ValidCommands =
@@ -104,6 +158,7 @@ public class InputProcesser
         "block",
         "dodge",
         "drop",
+        "info",
         "take",
         "use",
         "walk"
@@ -117,7 +172,7 @@ public class InputProcesser
         'W'
     ];
 
-    private static readonly List<char> ValidAttackBlockDodgeParams =
+    private static readonly List<char> ValidAttackDodgeParams =
     [
         'U',
         'D',
@@ -128,7 +183,6 @@ public class InputProcesser
     private static readonly List<string> ValidDropUseParams =
     [
         "sword",
-        "bettersword",
         "medkit",
         "map",
         "lamp"
