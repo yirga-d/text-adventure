@@ -6,7 +6,6 @@ namespace knight_text_adventure
 {
     static class Program
     {
-
         static void Main()
         {
             Console.Clear();
@@ -43,17 +42,17 @@ namespace knight_text_adventure
             throneRoom.AddNeighborRoom("East", hall);
 
             forge.AddNeighborRoom("West", hall);
-            
+
             Npc skeleton = new Npc("Skeleton", hall, 7);
             Npc dragon = new Npc("Dragon", throneRoom, 7, true);
-            
+
             Console.Write("The castle of the princess has been attacked. \n" +
-                              "As a knight, it is your responsibility to save the princess out of danger.\n" +
-                              "Choose a name:");
-            string chosenName =  "Knight " + Console.ReadLine();
+                          "As a knight, it is your responsibility to save the princess out of danger.\n" +
+                          "Choose a name:");
+            string chosenName = "Knight " + Console.ReadLine();
 
             Protagonist protagonist = new Protagonist(chosenName, 3, [sword], castleGrounds);
-            
+
             Console.WriteLine($"Your name is {protagonist.Name}. The Castle of the princess has been attacked.");
 
             while (protagonist.Hp > 0)
@@ -80,6 +79,7 @@ namespace knight_text_adventure
                     Console.WriteLine("Invalid Input");
                 }
             }
+
             protagonist.Room.PrintNeighbors();
         }
     }

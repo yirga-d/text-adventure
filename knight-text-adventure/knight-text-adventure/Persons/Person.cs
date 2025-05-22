@@ -7,9 +7,9 @@ namespace knight_text_adventure.Persons
         public string Name { get; set; }
 
         public int Hp { get; set; }
-        
+
         public Room Room { get; set; }
-        
+
         public virtual void Attack(char direction, bool fire = false)
         {
         }

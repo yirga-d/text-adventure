@@ -9,6 +9,7 @@ public class InputProcesser
     {
         return CheckInputIsCommand(commandString) && CheckIsValidParam(commandString, paramInput);
     }
+
     public static bool CheckInputIsCommand(string commandString)
     {
         return ValidCommands.Contains(commandString.ToLower());
@@ -40,11 +41,12 @@ public class InputProcesser
                 return false;
             }
         }
+
         return true;
     }
-    
-    
-    public static void TriggerMethod(Protagonist protagonist, string commandString, string commandParamString = "place-holder",
+
+    public static void TriggerMethod(Protagonist protagonist, string commandString,
+        string commandParamString = "place-holder",
         char threatDirection = '0', bool fire = false)
     {
         string commandLower = commandString.ToLower();
@@ -76,6 +78,7 @@ public class InputProcesser
                     Console.WriteLine("Entered item is not in your inventory.");
                     break;
                 }
+
                 if (commandLower == "drop")
                 {
                     protagonist.Drop(chosenItem);
@@ -84,6 +87,7 @@ public class InputProcesser
                 {
                     protagonist.Use(chosenItem);
                 }
+
                 break;
             case "walk":
                 protagonist.Walk(commandParamString);
