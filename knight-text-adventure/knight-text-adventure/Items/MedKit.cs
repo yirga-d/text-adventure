@@ -14,6 +14,7 @@ namespace knight_text_adventure.Items
         public override void Use()
         {
             MedKitUsing?.Invoke(HP);
+            HP = 0;
         }
     }
 }

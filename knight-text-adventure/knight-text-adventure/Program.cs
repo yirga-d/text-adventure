@@ -57,6 +57,9 @@ namespace knight_text_adventure
             }
             
             protagonist.Room.PrintNeighbors();
+
+            protagonist.Take(medkit);
+            protagonist.Use(medkit);
         }
 
         static void InitializeRoomsAndNeighbors()

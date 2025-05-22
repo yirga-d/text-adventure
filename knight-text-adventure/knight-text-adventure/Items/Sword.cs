@@ -10,9 +10,10 @@ namespace knight_text_adventure.Items
             Damage = damage;
         }
 
-        public override void Use()
+        public override void Use()//
         {
             Console.WriteLine("Wschhh");
+            Damage = 0;
         }
     }
 }
