@@ -63,10 +63,18 @@ public class InputProcesser
         switch (commandLower)
         {
             case "attack":
-                protagonist.Attack(paramOneChar);
+                if (protagonist.Room.Npcs != null)
+                {
+                    protagonist.Attack(protagonist, protagonist.Room.Npcs, paramOneChar);
+                }
+                else
+                {
+                    Console.WriteLine("There's no enemy in this room.");
+                }
+
                 break;
             case "block":
-                protagonist.Block(paramOneChar, threatDirection, fire);
+                protagonist.Block(fire);
                 break;
             case "dodge":
                 protagonist.Dodge(paramOneChar, threatDirection);

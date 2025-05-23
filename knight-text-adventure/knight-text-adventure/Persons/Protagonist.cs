@@ -22,22 +22,46 @@ namespace knight_text_adventure.Persons
             Room = startRoom;
         }
 
-        public override void Attack(char direction, bool fire = false)
+        public override void Attack(Protagonist protagonist, Npc enemy, char direction, bool fire = false)
         {
-            Console.WriteLine("Attacking " + Room.Npcs?.Name);
-        }
-
-        public bool Block(char direction, char threatDirection, bool fire)
-        {
-            if (direction != threatDirection || fire)
+            bool attackWorked = false;
+            foreach (Item item in Inventory)
             {
-                Hp--;
+                if (item is Sword sword)
+                {
+                    if (direction == enemy.VulnerableFrom)
+                    {
+                        enemy.Hp -= sword.Damage;
+                        attackWorked = true;
+                        break;
+                    }
+                }
             }
 
-            return direction == threatDirection && !fire;
+            if (attackWorked)
+            {
+                Console.WriteLine("Successful attack");
+            }
+            else
+            {
+                Console.WriteLine("Attack wasn't successful");
+            }
         }
 
-        public bool Dodge(char direction, char threatDirection)
+        public void Block(bool fire)
+        {
+            if (fire)
+            {
+                Hp = Hp - Room.Npcs!.Damage;
+                Console.WriteLine("Blocking isn't effective against fire. You've been hurt.");
+            }
+            else
+            {
+                Console.WriteLine($"You've blocked the {Room.Npcs!.Name}'s attack.");
+            }
+        }
+
+        public void Dodge(char direction, char threatDirection)
         {
             char correctDodgeDirection = threatDirection switch
             {
@@ -49,10 +73,13 @@ namespace knight_text_adventure.Persons
             };
             if (direction != correctDodgeDirection)
             {
-                Hp--;
+                Hp = Hp - Room.Npcs!.Damage;
+                Console.WriteLine("You dodged into the wrong direction. You've been hurt.");
             }
-
-            return direction == correctDodgeDirection;
+            else if (direction == correctDodgeDirection)
+            {
+                Console.WriteLine("Successfully dodged.");
+            }
         }
 
         public void Drop(Item item)

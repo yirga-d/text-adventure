@@ -10,8 +10,33 @@ namespace knight_text_adventure.Persons
 
         public Room Room { get; set; }
 
-        public virtual void Attack(char direction, bool fire = false)
+        public virtual void Attack(Protagonist protagonist, Npc? enemy, char direction, bool fire = false)
         {
+        }
+
+        public static string ConvertCharToString(char directionChar)
+        {
+            string directionString;
+            switch (directionChar)
+            {
+                case 'U':
+                    directionString = "Top";
+                    break;
+                case 'D':
+                    directionString = "Bottom";
+                    break;
+                case 'L':
+                    directionString = "Left";
+                    break;
+                case 'R':
+                    directionString = "Right";
+                    break;
+                default:
+                    directionString = "Error in Npc.Attack() method";
+                    break;
+            }
+
+            return directionString;
         }
     }
 }

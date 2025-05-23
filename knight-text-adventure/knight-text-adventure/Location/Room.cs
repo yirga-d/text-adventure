@@ -7,7 +7,7 @@ namespace knight_text_adventure.Location
     {
         public string Name { get; set; }
 
-        private bool IsLighting { get; set; }
+        private bool IsLit { get; set; }
 
         private bool IsLocked { get; set; }
 
@@ -17,11 +17,11 @@ namespace knight_text_adventure.Location
 
         public Dictionary<string, Room> Neighbors = new();
 
-        public Room(string name, bool locked = false, bool isLighting = true)
+        public Room(string name, bool locked = false, bool isLit = true)
         {
             Name = name;
             IsLocked = locked;
-            IsLighting = isLighting;
+            IsLit = isLit;
         }
 
         public void AddNeighborRoom(string direction, Room room)
@@ -31,7 +31,7 @@ namespace knight_text_adventure.Location
 
         public void PrintNeighbors()
         {
-            Console.WriteLine($"You've just entered the {Name}");
+            Console.WriteLine($"You're in the {Name}");
             foreach (var neighbor in Neighbors)
             {
                 Console.WriteLine($"{neighbor.Key.ToString()}: {neighbor.Value.Name}");
@@ -41,6 +41,11 @@ namespace knight_text_adventure.Location
         public void AddNPCs(Npc npc)
         {
             Npcs = npc;
+        }
+
+        public void RemoveNpcs()
+        {
+            Npcs = null;
         }
 
         public void AddItems(params Item[] items)
@@ -63,7 +68,7 @@ namespace knight_text_adventure.Location
 
         public void TurnOnTheLight()
         {
-            if (!IsLighting && Npcs != null)
+            if (!IsLit && Npcs != null)
             {
                 Console.WriteLine("Oh no! Hier the enemy!");
                 //NPCs.Attack();
