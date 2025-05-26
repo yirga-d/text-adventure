@@ -1,5 +1,3 @@
-using knight_text_adventure.Location;
-
 namespace knight_text_adventure.Persons;
 
 public class Fight
@@ -49,6 +47,7 @@ public class Fight
                     InputProcesser.TriggerMethod(protagonist, commandString, commandParams);
                 }
             }
+
             Console.Clear();
             Console.WriteLine($"Congrats, you killed the {enemy.Name}.");
             protagonist.Room.RemoveNpcs();

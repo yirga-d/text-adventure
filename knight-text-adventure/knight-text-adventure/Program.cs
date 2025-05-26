@@ -10,11 +10,12 @@ namespace knight_text_adventure
         {
             Console.Clear();
 
-            Item sword = new Sword(3, "simple sword");
-            Item swordBetter = new Sword(6, "better sword");
-            Item medkit = new Medkit(3, "medkit");
-            Item map = new Map("map");
-            Item lamp = new Lamp("lamp");
+            Item sword = new Sword(3, "Sword");
+            Item betterSword = new Sword(6, "betterSword");
+            Item medkit = new Medkit(3, "Medkit");
+            Item map = new Map("Map");
+            Item lamp = new Lamp("Lamp");
+            Item ram = new Ram("Ram");
 
             Room forest = new Room("Forest");
             Room castleGrounds = new Room("Castle Grounds");
@@ -32,11 +33,14 @@ namespace knight_text_adventure
             castleGrounds.AddNeighborRoom("North", castleEntrance);
             castleGrounds.AddNeighborRoom("South", forest);
             castleGrounds.AddNeighborRoom("West", workshop);
+            castleGrounds.AddItems(map);
 
             workshop.AddNeighborRoom("East", castleGrounds);
+            workshop.AddItems(ram);
 
             castleEntrance.AddNeighborRoom("North", hall);
             castleEntrance.AddNeighborRoom("South", castleGrounds);
+            castleEntrance.AddItems(lamp);
 
             hall.AddNeighborRoom("East", forge);
             hall.AddNeighborRoom("South", castleEntrance);
@@ -47,6 +51,7 @@ namespace knight_text_adventure
             throneRoom.AddNPCs(dragon);
 
             forge.AddNeighborRoom("West", hall);
+            forge.AddItems(betterSword, medkit);
 
 
             Console.Write("The castle of the princess has been attacked. \n" +

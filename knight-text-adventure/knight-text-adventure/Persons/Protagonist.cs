@@ -85,18 +85,21 @@ namespace knight_text_adventure.Persons
         public void Drop(Item item)
         {
             Inventory.Remove(item);
+            Console.WriteLine($"Dropped {item.Name}");
         }
 
-        public bool Take(Item item)
+        public void Take(Item item)
         {
             if (Inventory.Count >= 2)
             {
-                Console.WriteLine($"Inventory is already full.\n Drop an item to pick up {item.Name}");
-                return false;
+                Console.WriteLine($"Inventory is already full.\nDrop an item to pick up {item.Name}");
+            }
+            else
+            {
+                Inventory.Add(item);
+                Console.WriteLine($"Added {item.Name} to your inventory.");
             }
 
-            Inventory.Add(item);
-            return true;
         }
 
         public void Use(Item item)
