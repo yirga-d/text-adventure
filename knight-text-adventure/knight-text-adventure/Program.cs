@@ -65,7 +65,7 @@ namespace knight_text_adventure
 
             while (protagonist.Hp > 0)
             {
-                if (protagonist.Room.Npcs != null)
+                if (protagonist.Room.Npcs != null && protagonist.Room.IsLit)
                 {
                     Fight.FightSequence(protagonist);
                     if (protagonist.Hp <= 0) break;

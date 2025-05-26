@@ -7,7 +7,7 @@ namespace knight_text_adventure.Location
     {
         public string Name { get; set; }
 
-        private bool IsLit { get; set; }
+        public bool IsLit { get; set; }
 
         private bool IsLocked { get; set; }
 

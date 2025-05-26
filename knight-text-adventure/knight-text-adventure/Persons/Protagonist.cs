@@ -25,6 +25,7 @@ namespace knight_text_adventure.Persons
         public override void Attack(Protagonist protagonist, Npc enemy, char direction, bool fire = false)
         {
             bool attackWorked = false;
+            int initialHp = enemy.Hp;
             foreach (Item item in Inventory)
             {
                 if (item is Sword sword)
@@ -38,13 +39,13 @@ namespace knight_text_adventure.Persons
                 }
             }
 
-            if (attackWorked)
+            if (initialHp != enemy.Hp)
             {
                 Console.WriteLine("Successful attack");
             }
             else
             {
-                Console.WriteLine("Attack wasn't successful");
+                Console.WriteLine("Didn't cause any damage");
             }
         }
 
@@ -85,6 +86,7 @@ namespace knight_text_adventure.Persons
         public void Drop(Item item)
         {
             Inventory.Remove(item);
+            Room.AddItems(item);
             Console.WriteLine($"Dropped {item.Name}");
         }
 
