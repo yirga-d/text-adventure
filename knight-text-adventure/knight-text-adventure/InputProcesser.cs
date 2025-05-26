@@ -59,25 +59,34 @@ public class InputProcesser
     {
         string commandLower = commandString.ToLower();
         char paramOneChar = commandParamString.ToUpper().First();
+        Item? chosenItem = null;
 
         switch (commandLower)
         {
             case "attack":
-                protagonist.Attack(paramOneChar);
+                if (protagonist.Room.Npcs != null)
+                {
+                    protagonist.Attack(protagonist, protagonist.Room.Npcs, paramOneChar);
+                }
+                else
+                {
+                    Console.WriteLine("There's no enemy in this room.");
+                }
+
                 break;
             case "block":
-                protagonist.Block(paramOneChar, threatDirection, fire);
+                protagonist.Block(fire);
                 break;
             case "dodge":
                 protagonist.Dodge(paramOneChar, threatDirection);
                 break;
             case "drop" or "use":
-                Item? chosenItem = null;
                 foreach (var item in protagonist.Inventory)
                 {
-                    if (item.Name == commandParamString.ToLower())
+                    if (item.Name.ToLower() == commandParamString.ToLower())
                     {
                         chosenItem = item;
+                        break;
                     }
                 }
 
@@ -99,6 +108,28 @@ public class InputProcesser
                 break;
             case "info":
                 PrintUserManual(protagonist, commandParamString);
+                break;
+            case "take":
+                if (protagonist.Room.Content != null)
+                {
+                    foreach (Item item in protagonist.Room.Content)
+                    {
+                        if (item.Name.ToLower() == commandParamString.ToLower())
+                        {
+                            chosenItem = item;
+                            break;
+                        }
+                    }
+                }
+                if (chosenItem == null)
+                {
+                    Console.WriteLine("Entered item is not in this room.");
+                }
+                else
+                {
+                    protagonist.Take(chosenItem);
+                    protagonist.Room.Content = protagonist.Room.Content!.Where(item => item != chosenItem).ToArray();
+                }
                 break;
             case "walk":
                 protagonist.Walk(commandParamString);
