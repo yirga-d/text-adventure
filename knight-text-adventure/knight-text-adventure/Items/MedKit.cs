@@ -2,6 +2,7 @@ namespace knight_text_adventure.Items
 {
     public class Medkit : Item
     {
+        public event ItemsUsingHandler MedKitUsing;
         public int HP { get; set; }
 
         public Medkit(int hp, string name) : base(name)
@@ -12,7 +13,8 @@ namespace knight_text_adventure.Items
 
         public override void Use()
         {
-            Console.WriteLine("+++++++HP");
+            MedKitUsing?.Invoke(HP);
+            HP = 0;
         }
     }
 }

@@ -71,7 +71,7 @@ namespace knight_text_adventure
                     if (protagonist.Hp <= 0) break;
                 }
 
-                protagonist.Room.PrintNeighbors();
+                //protagonist.Room.PrintNeighbors();
 
                 Console.WriteLine("Enter a command:");
                 string userInput = Console.ReadLine() + " nonsense";

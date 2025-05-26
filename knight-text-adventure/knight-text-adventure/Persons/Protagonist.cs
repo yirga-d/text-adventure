@@ -13,6 +13,8 @@ namespace knight_text_adventure.Persons
     public class Protagonist : Person
     {
         public List<Item> Inventory { get; set; }
+        
+        public Room Room { get; set; }
 
         public Protagonist(string name, int hp, List<Item> inventory, Room startRoom)
         {
@@ -90,9 +92,19 @@ namespace knight_text_adventure.Persons
             Console.WriteLine($"Dropped {item.Name}");
         }
 
+        private void Heal(object hp)
+        {
+            Hp += (int)hp;
+        }
+
+        private void DesplayRoomPlan(object s)
+        {
+            Room.PrintNeighbors();
+        }
+
         public void Take(Item item)
         {
-            if (Inventory.Count >= 2)
+            if (Inventory.Count >= 3)
             {
                 Console.WriteLine($"Inventory is already full.\nDrop an item to pick up {item.Name}");
             }
@@ -100,8 +112,17 @@ namespace knight_text_adventure.Persons
             {
                 Inventory.Add(item);
                 Console.WriteLine($"Added {item.Name} to your inventory.");
+                if (item is Medkit)
+                {
+                    Medkit objeckt = (Medkit)item;
+                    objeckt.MedKitUsing += Heal;
+                }
+                else if (item is Map)
+                {
+                    Map objeckt = (Map)item;
+                    objeckt.MapUsing += DesplayRoomPlan;
+                }
             }
-
         }
 
         public void Use(Item item)
