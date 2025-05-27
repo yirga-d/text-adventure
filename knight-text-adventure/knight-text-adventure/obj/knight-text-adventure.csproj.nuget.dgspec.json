@@ -1,26 +1,38 @@
 {
   "format": 1,
   "restore": {
-    "/home/yirga/Documents/github/text-adventure/knight-text-adventure/knight-text-adventure/knight-text-adventure.csproj": {}
+    "C:\\Users\\ShulievdD\\source\\github\\text-adventure\\knight-text-adventure\\knight-text-adventure\\knight-text-adventure.csproj": {}
   },
   "projects": {
-    "/home/yirga/Documents/github/text-adventure/knight-text-adventure/knight-text-adventure/knight-text-adventure.csproj": {
+    "C:\\Users\\ShulievdD\\source\\github\\text-adventure\\knight-text-adventure\\knight-text-adventure\\knight-text-adventure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/yirga/Documents/github/text-adventure/knight-text-adventure/knight-text-adventure/knight-text-adventure.csproj",
+        "projectUniqueName": "C:\\Users\\ShulievdD\\source\\github\\text-adventure\\knight-text-adventure\\knight-text-adventure\\knight-text-adventure.csproj",
         "projectName": "knight-text-adventure",
-        "projectPath": "/home/yirga/Documents/github/text-adventure/knight-text-adventure/knight-text-adventure/knight-text-adventure.csproj",
-        "packagesPath": "/home/yirga/.nuget/packages/",
-        "outputPath": "/home/yirga/Documents/github/text-adventure/knight-text-adventure/knight-text-adventure/obj/",
+        "projectPath": "C:\\Users\\ShulievdD\\source\\github\\text-adventure\\knight-text-adventure\\knight-text-adventure\\knight-text-adventure.csproj",
+        "packagesPath": "C:\\Users\\ShulievdD\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ShulievdD\\source\\github\\text-adventure\\knight-text-adventure\\knight-text-adventure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "/home/yirga/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ShulievdD\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "https://api.nuget.org/v3/index.json": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/MXX-SWP/_packaging/MXX-SWP/nuget/v3/index.json": {},
+          "https://tfsbam.medatixx.net/DefaultCollection/_packaging/Serviceprovider/nuget/v3/index.json": {},
+          "https://tfsbam.medatixx.net/DefaultCollection/_packaging/TeamD/nuget/v3/index.json": {},
+          "https://tfsbam.medatixx.net/DefaultCollection/_packaging/VO/nuget/v3/index.json": {},
+          "https://tfsbam.medatixx.net/DefaultCollection/_packaging/x.common/nuget/v3/index.json": {},
+          "https://tfsbam.medatixx.net/defaultcollection/_packaging/Azure.UpdateService/nuget/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
@@ -32,7 +44,13 @@
           "warnAsError": [
             "NU1605"
           ]
-        }
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
         "net8.0": {
@@ -53,7 +71,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.115/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.204/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

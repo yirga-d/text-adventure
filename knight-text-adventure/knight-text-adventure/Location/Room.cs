@@ -78,7 +78,6 @@ namespace knight_text_adventure.Location
             if (!IsLit && Npcs != null)
             {
                 Console.WriteLine("Oh no! Hier the enemy!");
-                //NPCs.Attack();
             }
         }
     }

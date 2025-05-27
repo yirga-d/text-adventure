@@ -97,9 +97,19 @@ namespace knight_text_adventure.Persons
             Hp += (int)hp;
         }
 
-        private void DisplayRoomPlan(object s)
+        private void DisplayRoomPlan(object s = null)
         {
             Room.PrintNeighbors();
+        }
+
+        private void RoomUnlock(object s = null)
+        {
+            Room.UnLock();
+        }
+
+        private void TurnOn(object s = null)
+        {
+            Room.TurnOnTheLight();
         }
 
         public void Take(Item item)
@@ -114,13 +124,23 @@ namespace knight_text_adventure.Persons
                 Console.WriteLine($"Added {item.Name} to your inventory.");
                 if (item is Medkit)
                 {
-                    Medkit objeckt = (Medkit)item;
-                    objeckt.MedKitUsing += Heal;
+                    Medkit thing = (Medkit)item;
+                    thing.MedKitUsing += Heal;
                 }
                 else if (item is Map)
                 {
-                    Map objeckt = (Map)item;
-                    objeckt.MapUsing += DisplayRoomPlan;
+                    Map thing = (Map)item;
+                    thing.MapUsing += DisplayRoomPlan;
+                }
+                else if(item is Ram) 
+                {
+                    Ram thing = (Ram)item;
+                    thing.RamUsing += RoomUnlock;
+                }
+                else if (item is Lamp)
+                {
+                    Lamp thing = (Lamp)item;
+                    thing.LampUsing += TurnOn;
                 }
             }
         }
@@ -133,7 +153,7 @@ namespace knight_text_adventure.Persons
             }
         }
 
-        public bool Walk(String enteredDirection = "")
+        public bool Walk(string enteredDirection = "")
         {
             var startRoom = Room;
             string direction = enteredDirection.ToUpper().First() switch

@@ -8,6 +8,9 @@ namespace knight_text_adventure.Items
 {
     public class Ram : Item
     {
+
+        public event ItemsUsingHandler RamUsing;
+
         public Ram(string name) : base(name)
         {
             Name = name;
@@ -15,7 +18,7 @@ namespace knight_text_adventure.Items
 
         public override void Use()
         {
-
+            RamUsing?.Invoke(this);
         }
     }
 }
