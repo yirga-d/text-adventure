@@ -103,6 +103,7 @@ public class InputProcesser
                 else
                 {
                     protagonist.Use(chosenItem);
+                    if (chosenItem is Medkit) protagonist.Inventory.Remove(chosenItem);
                 }
 
                 break;
