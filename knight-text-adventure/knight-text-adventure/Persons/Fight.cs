@@ -33,7 +33,7 @@ public class Fight
                 Console.WriteLine(
                     $"After its attack, the {enemy.Name} is vulnerable from the {Person.ConvertCharToString(nextDirection)}.");
                 string userAction = Console.ReadLine() + " nonsense";
-                bool userAttacks = (userAction.StartsWith("attack"));
+                bool userAttacks = userAction.StartsWith("attack");
                 if (!userAttacks)
                 {
                     Console.WriteLine("You missed your chance to attack.");

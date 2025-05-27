@@ -21,7 +21,8 @@ namespace knight_text_adventure
             Room castleGrounds = new Room("Castle Grounds");
             Room workshop = new Room("Workshop");
             Room castleEntrance = new Room("Castle Entrance", true);
-            Room hall = new Room("Hall", isLit: false);
+            //TO-DO: isLit => false
+            Room hall = new Room("Hall", isLit: true);
             Room forge = new Room("Forge");
             Room throneRoom = new Room("Throne Room");
 
@@ -71,7 +72,7 @@ namespace knight_text_adventure
                     if (protagonist.Hp <= 0) break;
                 }
 
-                //protagonist.Room.PrintNeighbors();
+                protagonist.Room.PrintNeighbors();
 
                 Console.WriteLine("Enter a command:");
                 string userInput = Console.ReadLine() + " nonsense";

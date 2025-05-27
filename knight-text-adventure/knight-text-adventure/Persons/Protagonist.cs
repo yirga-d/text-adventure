@@ -97,7 +97,7 @@ namespace knight_text_adventure.Persons
             Hp += (int)hp;
         }
 
-        private void DesplayRoomPlan(object s)
+        private void DisplayRoomPlan(object s)
         {
             Room.PrintNeighbors();
         }
@@ -120,7 +120,7 @@ namespace knight_text_adventure.Persons
                 else if (item is Map)
                 {
                     Map objeckt = (Map)item;
-                    objeckt.MapUsing += DesplayRoomPlan;
+                    objeckt.MapUsing += DisplayRoomPlan;
                 }
             }
         }
