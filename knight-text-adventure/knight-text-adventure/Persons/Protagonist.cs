@@ -43,11 +43,15 @@ namespace knight_text_adventure.Persons
 
             if (initialHp != enemy.Hp)
             {
+                Program.ChangeColor("green");
                 Console.WriteLine("Successful attack");
+                Program.ChangeColor("white");
             }
             else
             {
+                Program.ChangeColor("red");
                 Console.WriteLine("Didn't cause any damage");
+                Program.ChangeColor("white");
             }
         }
 
@@ -56,11 +60,15 @@ namespace knight_text_adventure.Persons
             if (fire)
             {
                 Hp = Hp - Room.Npcs!.Damage;
+                Program.ChangeColor("red");
                 Console.WriteLine("Blocking isn't effective against fire. You've been hurt.");
+                Program.ChangeColor("white");
             }
             else
             {
+                Program.ChangeColor("green");
                 Console.WriteLine($"You've blocked the {Room.Npcs!.Name}'s attack.");
+                Program.ChangeColor("white");
             }
         }
 
@@ -69,19 +77,23 @@ namespace knight_text_adventure.Persons
             char correctDodgeDirection = threatDirection switch
             {
                 'U' => 'D',
-                'D' => 'D',
+                'D' => 'U',
                 'L' => 'R',
                 'R' => 'L',
                 _ => '0'
             };
             if (direction != correctDodgeDirection)
             {
+                Program.ChangeColor("red");
                 Hp = Hp - Room.Npcs!.Damage;
                 Console.WriteLine("You dodged into the wrong direction. You've been hurt.");
+                Program.ChangeColor("white");
             }
             else if (direction == correctDodgeDirection)
             {
+                Program.ChangeColor("green");
                 Console.WriteLine("Successfully dodged.");
+                Program.ChangeColor("white");
             }
         }
 
@@ -97,14 +109,36 @@ namespace knight_text_adventure.Persons
             Hp += (int)hp;
         }
 
+        public void DisplayInventory()
+        {
+            Console.WriteLine("Inventory:");
+            foreach (Item item in Inventory)
+            {
+                Console.WriteLine(item.Name);
+            }
+        }
+        
         private void DisplayRoomPlan(object s = null)
         {
-            Room.PrintNeighbors();
+            if (Room.IsLit)
+            {
+                Room.PrintNeighbors();
+            }
+            else
+            {
+                Console.WriteLine("The room is to dark to read the map");
+            }
         }
 
         public void Explore()
         {
-            Console.WriteLine($"Room Content:");
+            Console.WriteLine("Inventory:");
+            foreach (Item item in Inventory)
+            {
+                Console.WriteLine(item.Name);
+            }
+            Console.WriteLine("");
+            Console.WriteLine("Room Content:");
             if (Room.Content != null)
             {
                 foreach (Item item in Room.Content)
@@ -112,7 +146,10 @@ namespace knight_text_adventure.Persons
                     Console.WriteLine(item.Name);
                 }
             }
+            Console.WriteLine("");
+            InputProcesser.TriggerMethod(this, "use", "map");
         }
+
 
         private void RoomUnlock(object s = null)
         {

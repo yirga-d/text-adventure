@@ -14,6 +14,9 @@ namespace knight_text_adventure.Items
         public override void Use()
         {
             MedKitUsing?.Invoke(HP);
+            Program.ChangeColor("green");
+            Console.WriteLine("Medkit used! HP+++");
+            Program.ChangeColor("white");
         }
     }
 }

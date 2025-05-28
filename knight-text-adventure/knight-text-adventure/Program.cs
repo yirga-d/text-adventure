@@ -20,8 +20,7 @@ namespace knight_text_adventure
             Room forest = new Room("Forest");
             Room castleGrounds = new Room("Castle Grounds");
             Room workshop = new Room("Workshop");
-            Room castleEntrance = new Room("Castle Entrance",locked: true);
-            //TO-DO: isLit => false
+            Room castleEntrance = new Room("Castle Entrance", locked: true);
             Room hall = new Room("Hall", isLit: false);
             Room forge = new Room("Forge");
             Room throneRoom = new Room("Throne Room");
@@ -34,7 +33,7 @@ namespace knight_text_adventure
             castleGrounds.AddNeighborRoom("North", castleEntrance);
             castleGrounds.AddNeighborRoom("South", forest);
             castleGrounds.AddNeighborRoom("West", workshop);
-            castleGrounds.AddItem(map);
+            //castleGrounds.AddItem(map);
 
             workshop.AddNeighborRoom("East", castleGrounds);
             workshop.AddItem(ram);
@@ -56,16 +55,20 @@ namespace knight_text_adventure
             forge.AddItem(medkit);
 
 
-            Console.Write("The castle of the princess has been attacked. \n" +
-                          "As a knight, it is your responsibility to save the princess out of danger.\n" +
-                          "Choose a name:");
+            Console.Write("Choose a name:");
             string chosenName = "Knight " + Console.ReadLine();
 
             Protagonist protagonist = new Protagonist(chosenName, 5, [sword], castleGrounds);
-
-            Console.WriteLine($"Your name is {protagonist.Name}. The Castle of the princess has been attacked.");
-
-            while (protagonist.Hp > 0)
+            protagonist.Take(map);
+            InputProcesser.PrintUserManual();
+            Console.WriteLine("You can display this menu at any time by entering \"info\". " +
+                              "We suggest starting by using the \"explore\" command.");
+            Console.WriteLine();
+            ChangeColor("yellow");
+            Console.WriteLine($"Your name is {protagonist.Name}. The Castle of the princess has been attacked.\n" +
+                              $"As a knight, it is your responsibility to save the princess out of danger.");
+            ChangeColor("white");
+            while (protagonist.Hp > 0 && dragon.Hp > 0)
             {
                 if (protagonist.Room.Npcs != null && protagonist.Room.IsLit)
                 {
@@ -73,53 +76,97 @@ namespace knight_text_adventure
                     if (protagonist.Hp <= 0) break;
                 }
 
-                if (protagonist.Room == hall)
+                ChangeColor("Gray");
+                Console.WriteLine($"Current Location: {protagonist.Room.Name}");
+                ChangeColor("White");
+                if (protagonist.Room == hall && hall.IsLit)
                 {
                     Console.WriteLine("Be careful before you enter the throne room. It seems pretty fiery in there.");
                     Console.WriteLine();
                 }
+
                 if (!protagonist.Room.IsLit)
                 {
                     Console.WriteLine("The room is completely dark.");
                 }
-                else
-                {
-                    protagonist.Room.PrintNeighbors();
-                }
-
+                
+                ChangeColor("Gray");
                 Console.WriteLine("Enter a command:");
-                string userInput = Console.ReadLine() + " nonsense";
+                ChangeColor("White");
+                string userInput = Console.ReadLine() + " xxx";
+                Console.Clear();
 
                 string[] userInputArray = userInput.Split(' ');
 
                 string commandString = userInputArray[0];
                 string commandParams = userInputArray[1];
 
-                bool isValidCommand = InputProcesser.CheckIsValidCommand(commandString, commandParams);
-                bool isValidCommandDarkRoom = (isValidCommand) && (userInput.ToLower().StartsWith("walk s") ||
-                                                                   userInput.ToLower().StartsWith("use lamp"));
-                
-                Console.Clear();
-                
+                bool isValidCommandFull = InputProcesser.CheckIsValidCommand(commandString, commandParams);
+                bool isValidCommandDarkRoom = (isValidCommandFull) && (userInput.ToLower().StartsWith("walk s") ||
+                                                                       userInput.ToLower().StartsWith("use lamp"));
+
+
                 if (!protagonist.Room.IsLit && !isValidCommandDarkRoom)
                 {
                     Console.WriteLine("Command can not be executed right now. Find a light source first");
                 }
-                else if (isValidCommand)
+                else if (isValidCommandFull)
                 {
                     InputProcesser.TriggerMethod(protagonist, commandString, commandParams);
                 }
                 else
                 {
-                    Console.WriteLine(
-                        "Invalid Input. Enter \"info\" and your command (e.g. \"info walk\") for instructions \n" +
-                        "or simply enter \"info\" for a general user manual.");
+                    Console.WriteLine("Not a valid command.");
+                    InputProcesser.PrintUserManual(commandString);
                 }
+
+                Console.WriteLine();
+                Console.WriteLine();
             }
 
-            Console.WriteLine("Well... you're dead. Do you want to try again?");
+            if (dragon.Hp > 0)
+            {
+                ChangeColor("Red");
+                Console.WriteLine("Well... you're dead. Do you want to try again?");
+                ChangeColor("White");
+            }
+            else
+            {
+                ChangeColor("Yellow");
+                Console.WriteLine("You saved the princess. Do you want play again?");
+                ChangeColor("White");
+            }
+
             string restart = Console.ReadLine() + " ";
-            if (restart.ToLower().StartsWith('Y')) Main();
+            if (restart.ToLower().StartsWith('Y'))
+            {
+                Main();
+            }
+        }
+
+        public static void ChangeColor(string color)
+        {
+            switch (color.ToLower())
+            {
+                case "red":
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    break;
+                case "white":
+                    Console.ForegroundColor = ConsoleColor.White;
+                    break;
+                case "yellow":
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    break;
+                case "green":
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    break;
+                case "blue":
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    break;
+                case "gray":
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    break;
+            }
         }
     }
 }

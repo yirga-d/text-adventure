@@ -25,8 +25,10 @@ namespace knight_text_adventure.Persons
         public override void Attack(Protagonist protagonist, Npc? enemy, char direction, bool fire = false)
         {
             string directionString = ConvertCharToString(direction);
+            Program.ChangeColor("red");
             Console.WriteLine($"{enemy.Name} is attacking {protagonist.Name} from the {directionString}.");
-            string userAction = Console.ReadLine() + " nonsense";
+            Program.ChangeColor("white");
+            string userAction = Console.ReadLine() + " xxx";
 
             string[] userInputArray = userAction.Split(' ');
 
@@ -34,7 +36,9 @@ namespace knight_text_adventure.Persons
             string commandParams = userInputArray[1];
             if (commandString.ToLower() is not "dodge" and not "block" and not "info")
             {
+                Program.ChangeColor("red");
                 Console.WriteLine($"You've been hit by the {enemy.Name}'s attack");
+                Program.ChangeColor("white");
                 protagonist.Hp -= enemy.Damage;
             }
             else
