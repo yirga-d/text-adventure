@@ -18,39 +18,71 @@ public class InputProcesser
     public static bool CheckIsValidParam(string commandString, string param)
     {
         string commandLower = commandString.ToLower();
-        if (commandLower is "walk")
+        bool returnValue = true;
+        switch (commandLower)
         {
-            if (ValidWalkParams.Contains(param.ToUpper().First()) == false)
+            case "attack":
             {
-                return false;
+                if (ValidAttackDodgeParams.Contains(param.ToUpper().First()) == false)
+                {
+                    returnValue = false;
+                }
+
+                break;
+            }
+            case "walk":
+            {
+                if (ValidWalkParams.Contains(param.ToUpper().First()) == false)
+                {
+                    returnValue = false;
+                }
+
+                break;
+            }
+            case "dodge":
+            {
+                if (ValidAttackDodgeParams.Contains(param.ToUpper().First()) == false)
+                {
+                    returnValue = false;
+                }
+
+                break;
+            }
+            case "drop":
+            {
+                if (ValidDropUseParams.Contains(param.ToLower()) == false)
+                {
+                    returnValue = false;
+                }
+
+                break;
+            }
+            case "info":
+            {
+                if (ValidCommands.Contains(param.ToLower()) == false && param != "nonsense")
+                {
+                    returnValue = false;
+                }
+
+                break;
+            }
+            case "use":
+            {
+                if (ValidDropUseParams.Contains(param.ToLower()) == false)
+                {
+                    returnValue = false;
+                }
+
+                break;
             }
         }
 
-        if (commandLower is "dodge" or "attack")
+        if (!returnValue)
         {
-            if (ValidAttackDodgeParams.Contains(param.ToUpper().First()) == false)
-            {
-                return false;
-            }
+            PrintUserManual(commandLower);
         }
 
-        if (commandLower is "drop" or "use")
-        {
-            if (ValidDropUseParams.Contains(param.ToLower()) == false)
-            {
-                return false;
-            }
-        }
-
-        if (commandLower is "info")
-        {
-            if (ValidCommands.Contains(param.ToLower()) == false && param != "nonsense")
-            {
-                return false;
-            }
-        }
-
-        return true;
+        return returnValue;
     }
 
     public static void TriggerMethod(Protagonist protagonist, string commandString,
@@ -107,6 +139,9 @@ public class InputProcesser
                 }
 
                 break;
+            case "explore":
+                protagonist.Explore();
+                break;
             case "info":
                 PrintUserManual(protagonist, commandParamString);
                 break;
@@ -121,16 +156,24 @@ public class InputProcesser
                             break;
                         }
                     }
+
+                    if (chosenItem != null)
+                    {
+                        protagonist.Take(chosenItem);
+                        foreach (Item item in protagonist.Room.Content)
+                        {
+                            if (item.Name.ToLower() == commandParamString.ToLower())
+                            {
+                                protagonist.Room.Content!.Remove(item);
+                                break;
+                            }
+                        }
+
+                        break;
+                    }
                 }
-                if (chosenItem == null)
-                {
-                    Console.WriteLine("Entered item is not in this room.");
-                }
-                else
-                {
-                    protagonist.Take(chosenItem);
-                    protagonist.Room.Content = protagonist.Room.Content!.Where(item => item != chosenItem).ToArray();
-                }
+
+                Console.WriteLine("Entered item is not in this room.");
                 break;
             case "walk":
                 protagonist.Walk(commandParamString);
@@ -142,9 +185,8 @@ public class InputProcesser
         }
     }
 
-    public static void PrintUserManual(Protagonist protagonist, string requestedMethod)
+    public static void PrintUserManual(string requestedMethod = "")
     {
-        Console.Clear();
         switch (requestedMethod.ToLower())
         {
             case "attack":
@@ -157,12 +199,7 @@ public class InputProcesser
                 break;
             case "drop":
             case "use":
-                Console.WriteLine($"The {requestedMethod} command can be used with any item in your inventory:");
-                foreach (var item in protagonist.Inventory)
-                {
-                    Console.WriteLine("Drop/Use " + item.Name);
-                }
-
+                Console.WriteLine($"The {requestedMethod} can be used with any item in your inventory.");
                 break;
             case "take":
                 Console.WriteLine("The take command can be used with any item in your current room.");
@@ -177,11 +214,19 @@ public class InputProcesser
                     Console.WriteLine(command);
                 }
 
+                Console.WriteLine(
+                    "For more exact explanations use info with your desired command (e. g. \"info attack\").");
                 break;
         }
+    }
 
-        Console.WriteLine("Press enter to continue with the game.");
-        Console.ReadLine();
+    public static void PrintUserManual(Protagonist protagonist, string requestedMethod)
+    {
+        Console.WriteLine($"The {requestedMethod} command can be used with any item in your inventory:");
+        foreach (var item in protagonist.Inventory)
+        {
+            Console.WriteLine("Drop/Use " + item.Name);
+        }
     }
 
     private static readonly List<string> ValidCommands =
@@ -190,6 +235,7 @@ public class InputProcesser
         "block",
         "dodge",
         "drop",
+        "explore",
         "info",
         "take",
         "use",
@@ -217,6 +263,7 @@ public class InputProcesser
         "sword",
         "medkit",
         "map",
-        "lamp"
+        "lamp",
+        "ram"
     ];
 }

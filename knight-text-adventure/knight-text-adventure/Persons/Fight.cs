@@ -4,11 +4,15 @@ public class Fight
 {
     public static void FightSequence(Protagonist protagonist)
     {
+        InputProcesser.PrintUserManual("attack");
+        InputProcesser.PrintUserManual("block");
+        InputProcesser.PrintUserManual("dodge");
         Npc? enemy = protagonist.Room.Npcs;
         if (enemy != null)
         {
             Console.WriteLine($"There's a {enemy.Name} in the {protagonist.Room.Name} and it's attacking you.");
-            Console.Write($"Be careful: ");
+            Program.ChangeColor("red");
+            Console.Write("Be careful: ");
             if (enemy.Name == "Skeleton")
             {
                 Console.WriteLine("dodge or block the skeleton's attacks");
@@ -24,9 +28,13 @@ public class Fight
 
             while (enemy.Hp > 0 && protagonist.Hp > 0)
             {
+                Program.ChangeColor("gray");
+                Console.WriteLine($"{protagonist.Name}: {protagonist.Hp}HP        {enemy.Name}: {enemy.Hp}HP");
+                Program.ChangeColor("white");
                 attackNumber = rnd.Next(1, 5);
                 char direction = ConvertNumberToDirection(attackNumber);
                 enemy.Attack(protagonist, enemy, direction);
+                Console.WriteLine($"{protagonist.Name}: {protagonist.Hp}HP        {enemy.Name}: {enemy.Hp}HP");
                 if (protagonist.Hp <= 0) break;
                 char nextDirection = ConvertNumberToDirection(attackNumber + 1);
                 enemy.VulnerableFrom = nextDirection;
@@ -46,10 +54,16 @@ public class Fight
                     string commandParams = userInputArray[1];
                     InputProcesser.TriggerMethod(protagonist, commandString, commandParams);
                 }
+
+                Console.WriteLine($"{protagonist.Name}: {protagonist.Hp}HP        {enemy.Name}: {enemy.Hp}HP");
             }
 
             Console.Clear();
-            Console.WriteLine($"Congrats, you killed the {enemy.Name}.");
+            if (protagonist.Hp <= 0)
+            {
+                Console.WriteLine($"Congrats, you killed the {enemy.Name}.");
+            }
+
             protagonist.Room.RemoveNpcs();
         }
     }
