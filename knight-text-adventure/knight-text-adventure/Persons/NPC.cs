@@ -15,7 +15,7 @@ namespace knight_text_adventure.Persons
         public Npc(string name, Room room, int hp, int damage, bool spitsFire = false)
         {
             Name = name;
-            Room = room;
+            Room = room;//is never used
             Hp = hp;
             SpitsFire = spitsFire;
             IsAlive = true;

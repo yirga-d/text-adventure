@@ -218,5 +218,5 @@ public class InputProcesser
         "medkit",
         "map",
         "lamp"
-    ];
+    ];//ram
 }

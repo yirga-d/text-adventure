@@ -26,7 +26,7 @@ namespace knight_text_adventure.Persons
 
         public override void Attack(Protagonist protagonist, Npc enemy, char direction, bool fire = false)
         {
-            bool attackWorked = false;
+            bool attackWorked = false;//is never used
             int initialHp = enemy.Hp;
             foreach (Item item in Inventory)
             {
