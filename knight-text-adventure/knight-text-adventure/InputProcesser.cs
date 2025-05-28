@@ -217,6 +217,7 @@ public class InputProcesser
         "sword",
         "medkit",
         "map",
-        "lamp"
+        "lamp",
+        "ram"
     ];
 }

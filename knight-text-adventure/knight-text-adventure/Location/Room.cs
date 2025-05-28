@@ -5,13 +5,13 @@ namespace knight_text_adventure.Location
 {
     public class Room
     {
-        private readonly string[] Direction = new string[] {"North", "South", "East", "West"};
+        private readonly string[] Direction = new string[] { "North", "South", "East", "West" };
 
         public string Name { get; set; }
 
         public bool IsLit { get; set; }
 
-        private bool IsLocked { get; set; }
+        public bool IsLocked { get; set; }
 
         public Item[]? Content { get; set; }
 
@@ -62,13 +62,13 @@ namespace knight_text_adventure.Location
 
         public void UnLock()
         {
-            if (IsLocked)
-            {
-                Console.WriteLine("Bsch....");
-                IsLocked = false;
-                Console.WriteLine("The way is open");
-                return;
-            }
+            foreach (Room room in Neighbors.Values)
+                if (room.IsLocked)
+                {
+                    room.IsLocked = false;
+                    Console.WriteLine("Boom! Door is open");
+                    return;
+                }
 
             Console.WriteLine("The room is already open");
         }
@@ -77,7 +77,8 @@ namespace knight_text_adventure.Location
         {
             if (!IsLit && Npcs != null)
             {
-                Console.WriteLine("Oh no! Hier the enemy!");
+                IsLit = true;
+                Console.WriteLine("Light switched on");
             }
         }
     }

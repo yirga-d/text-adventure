@@ -174,6 +174,11 @@ namespace knight_text_adventure.Persons
             {
                 if (direction == neighbor.Key)
                 {
+                    if (neighbor.Value.IsLocked)
+                    {
+                        Console.WriteLine("The door is locked. Try to find a way in.");
+                        break;
+                    }
                     Room = neighbor.Value;
                     break;
                 }
@@ -181,7 +186,7 @@ namespace knight_text_adventure.Persons
 
             if (Room == startRoom)
             {
-                Console.WriteLine($"There's no room to the {enteredDirection} of you.");
+                Console.WriteLine($"\"Walk {enteredDirection}\" did not work.");
                 return false;
             }
 

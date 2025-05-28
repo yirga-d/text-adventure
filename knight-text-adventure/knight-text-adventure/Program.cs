@@ -72,6 +72,10 @@ namespace knight_text_adventure
                     if (protagonist.Hp <= 0) break;
                 }
 
+                if (!protagonist.Room.IsLit)
+                {
+                    Console.WriteLine("The room is completely dark.");
+                }
                 protagonist.Room.PrintNeighbors();
 
                 Console.WriteLine("Enter a command:");
@@ -83,9 +87,16 @@ namespace knight_text_adventure
                 string commandParams = userInputArray[1];
 
                 bool isValidCommand = InputProcesser.CheckIsValidCommand(commandString, commandParams);
-
+                bool isValidCommandDarkRoom = (isValidCommand) && (userInput.ToLower().StartsWith("walk s") ||
+                                                                   userInput.ToLower().StartsWith("use lamp"));
+                
                 Console.Clear();
-                if (isValidCommand)
+                
+                if (!protagonist.Room.IsLit && !isValidCommandDarkRoom)
+                {
+                    Console.WriteLine("Command can not be executed right now. Find a light source first");
+                }
+                else if (isValidCommand)
                 {
                     InputProcesser.TriggerMethod(protagonist, commandString, commandParams);
                 }
