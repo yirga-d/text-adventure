@@ -88,7 +88,7 @@ namespace knight_text_adventure.Persons
         public void Drop(Item item)
         {
             Inventory.Remove(item);
-            Room.AddItems(item);
+            Room.AddItem(item);
             Console.WriteLine($"Dropped {item.Name}");
         }
 
@@ -100,6 +100,18 @@ namespace knight_text_adventure.Persons
         private void DisplayRoomPlan(object s = null)
         {
             Room.PrintNeighbors();
+        }
+
+        public void Explore()
+        {
+            Console.WriteLine($"Room Content:");
+            if (Room.Content != null)
+            {
+                foreach (Item item in Room.Content)
+                {
+                    Console.WriteLine(item.Name);
+                }
+            }
         }
 
         private void RoomUnlock(object s = null)

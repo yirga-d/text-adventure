@@ -107,6 +107,9 @@ public class InputProcesser
                 }
 
                 break;
+            case "explore":
+                protagonist.Explore();
+                break;
             case "info":
                 PrintUserManual(protagonist, commandParamString);
                 break;
@@ -121,16 +124,23 @@ public class InputProcesser
                             break;
                         }
                     }
+
+                    if (chosenItem != null)
+                    {
+                        protagonist.Take(chosenItem);
+                        foreach (Item item in protagonist.Room.Content)
+                        {
+                            if (item.Name.ToLower() == commandParamString.ToLower())
+                            {
+                                protagonist.Room.Content!.Remove(item);
+                                break;
+                            }
+                        }
+                        break;
+                    }
                 }
-                if (chosenItem == null)
-                {
-                    Console.WriteLine("Entered item is not in this room.");
-                }
-                else
-                {
-                    protagonist.Take(chosenItem);
-                    protagonist.Room.Content = protagonist.Room.Content!.Where(item => item != chosenItem).ToArray();
-                }
+                
+                Console.WriteLine("Entered item is not in this room.");
                 break;
             case "walk":
                 protagonist.Walk(commandParamString);
@@ -190,6 +200,7 @@ public class InputProcesser
         "block",
         "dodge",
         "drop",
+        "explore",
         "info",
         "take",
         "use",

@@ -39,7 +39,7 @@ namespace knight_text_adventure.Persons
             }
             else
             {
-                InputProcesser.TriggerMethod(protagonist, commandString, commandParams, direction, fire);
+                InputProcesser.TriggerMethod(protagonist, commandString, commandParams, direction, enemy.SpitsFire);
             }
         }
     }

@@ -13,7 +13,7 @@ namespace knight_text_adventure.Location
 
         public bool IsLocked { get; set; }
 
-        public Item[]? Content { get; set; }
+        public List<Item>? Content { get; set; }
 
         public Npc? Npcs { get; set; }
 
@@ -24,6 +24,7 @@ namespace knight_text_adventure.Location
             Name = name;
             IsLocked = locked;
             IsLit = isLit;
+            Content = new();
         }
 
         public void AddNeighborRoom(string direction, Room room)
@@ -55,9 +56,9 @@ namespace knight_text_adventure.Location
             Npcs = null;
         }
 
-        public void AddItems(params Item[] items)
+        public void AddItem(Item item)
         {
-            Content = items;
+            Content.Add(item);
         }
 
         public void UnLock()

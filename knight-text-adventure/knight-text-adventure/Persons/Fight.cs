@@ -24,9 +24,12 @@ public class Fight
 
             while (enemy.Hp > 0 && protagonist.Hp > 0)
             {
+                Console.WriteLine($"{protagonist.Name}: {protagonist.Hp}HP        {enemy.Name}: {enemy.Hp}HP");
+                string hpStatus = $"{protagonist.Name}: {protagonist.Hp}HP        {enemy.Name}: {enemy.Hp}HP";
                 attackNumber = rnd.Next(1, 5);
                 char direction = ConvertNumberToDirection(attackNumber);
                 enemy.Attack(protagonist, enemy, direction);
+                Console.WriteLine($"{protagonist.Name}: {protagonist.Hp}HP        {enemy.Name}: {enemy.Hp}HP");
                 if (protagonist.Hp <= 0) break;
                 char nextDirection = ConvertNumberToDirection(attackNumber + 1);
                 enemy.VulnerableFrom = nextDirection;
@@ -46,6 +49,7 @@ public class Fight
                     string commandParams = userInputArray[1];
                     InputProcesser.TriggerMethod(protagonist, commandString, commandParams);
                 }
+                Console.WriteLine($"{protagonist.Name}: {protagonist.Hp}HP        {enemy.Name}: {enemy.Hp}HP");
             }
 
             Console.Clear();

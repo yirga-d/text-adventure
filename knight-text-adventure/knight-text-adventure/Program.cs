@@ -34,14 +34,14 @@ namespace knight_text_adventure
             castleGrounds.AddNeighborRoom("North", castleEntrance);
             castleGrounds.AddNeighborRoom("South", forest);
             castleGrounds.AddNeighborRoom("West", workshop);
-            castleGrounds.AddItems(map);
+            castleGrounds.AddItem(map);
 
             workshop.AddNeighborRoom("East", castleGrounds);
-            workshop.AddItems(ram);
+            workshop.AddItem(ram);
 
             castleEntrance.AddNeighborRoom("North", hall);
             castleEntrance.AddNeighborRoom("South", castleGrounds);
-            castleEntrance.AddItems(lamp);
+            castleEntrance.AddItem(lamp);
 
             hall.AddNeighborRoom("East", forge);
             hall.AddNeighborRoom("South", castleEntrance);
@@ -52,7 +52,8 @@ namespace knight_text_adventure
             throneRoom.AddNPCs(dragon);
 
             forge.AddNeighborRoom("West", hall);
-            forge.AddItems(betterSword, medkit);
+            forge.AddItem(betterSword);
+            forge.AddItem(medkit);
 
 
             Console.Write("The castle of the princess has been attacked. \n" +
@@ -72,11 +73,19 @@ namespace knight_text_adventure
                     if (protagonist.Hp <= 0) break;
                 }
 
+                if (protagonist.Room == hall)
+                {
+                    Console.WriteLine("Be careful before you enter the throne room. It seems pretty fiery in there.");
+                    Console.WriteLine();
+                }
                 if (!protagonist.Room.IsLit)
                 {
                     Console.WriteLine("The room is completely dark.");
                 }
-                protagonist.Room.PrintNeighbors();
+                else
+                {
+                    protagonist.Room.PrintNeighbors();
+                }
 
                 Console.WriteLine("Enter a command:");
                 string userInput = Console.ReadLine() + " nonsense";
