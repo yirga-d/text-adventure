@@ -159,13 +159,16 @@ public class InputProcesser
 
                     if (chosenItem != null)
                     {
-                        protagonist.Take(chosenItem);
-                        foreach (Item item in protagonist.Room.Content)
+                        bool takeWorked = protagonist.Take(chosenItem);
+                        if (!takeWorked)
                         {
-                            if (item.Name.ToLower() == commandParamString.ToLower())
+                            foreach (Item item in protagonist.Room.Content)
                             {
-                                protagonist.Room.Content!.Remove(item);
-                                break;
+                                if (item.Name.ToLower() == commandParamString.ToLower())
+                                {
+                                    protagonist.Room.Content!.Remove(item);
+                                    break;
+                                }
                             }
                         }
 

@@ -32,18 +32,19 @@ namespace knight_text_adventure.Location
             if (Direction.Contains(direction))
             {
                 Neighbors.Add(direction, room);
-                return;
             }
-            //error
         }
 
         public void PrintNeighbors()
         {
+            /*
             Console.WriteLine($"You're in the {Name}");
             foreach (var neighbor in Neighbors)
             {
                 Console.WriteLine($"{neighbor.Key.ToString()}: {neighbor.Value.Name}");
             }
+            */
+            Console.WriteLine($"North: {Neighbors.Values.Where(n => n.Key.ToString() == "North")}");
         }
 
         public void AddNPCs(Npc npc)

@@ -117,6 +117,18 @@ namespace knight_text_adventure.Persons
                 Console.WriteLine(item.Name);
             }
         }
+
+        public void DisplayRoomContent()
+        {
+            Console.WriteLine("Room Content:");
+            if (Room.Content != null)
+            {
+                foreach (Item item in Room.Content)
+                {
+                    Console.WriteLine(item.Name);
+                }
+            }
+        }
         
         private void DisplayRoomPlan(object s = null)
         {
@@ -132,20 +144,9 @@ namespace knight_text_adventure.Persons
 
         public void Explore()
         {
-            Console.WriteLine("Inventory:");
-            foreach (Item item in Inventory)
-            {
-                Console.WriteLine(item.Name);
-            }
+            DisplayInventory();
             Console.WriteLine("");
-            Console.WriteLine("Room Content:");
-            if (Room.Content != null)
-            {
-                foreach (Item item in Room.Content)
-                {
-                    Console.WriteLine(item.Name);
-                }
-            }
+            DisplayRoomContent();
             Console.WriteLine("");
             InputProcesser.TriggerMethod(this, "use", "map");
         }
@@ -161,11 +162,12 @@ namespace knight_text_adventure.Persons
             Room.TurnOnTheLight();
         }
 
-        public void Take(Item item)
+        public bool Take(Item item)
         {
             if (Inventory.Count >= 3)
             {
                 Console.WriteLine($"Inventory is already full.\nDrop an item to pick up {item.Name}");
+                return false;
             }
             else
             {
@@ -191,6 +193,7 @@ namespace knight_text_adventure.Persons
                     Lamp thing = (Lamp)item;
                     thing.LampUsing += TurnOn;
                 }
+                return true;
             }
         }
 

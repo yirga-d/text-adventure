@@ -133,7 +133,7 @@ namespace knight_text_adventure
             else
             {
                 ChangeColor("Yellow");
-                Console.WriteLine("You saved the princess. Do you want play again?");
+                Console.WriteLine("You saved the princess. Do you want to play again?");
                 ChangeColor("White");
             }
 
