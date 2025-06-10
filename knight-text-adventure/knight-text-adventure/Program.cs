@@ -61,6 +61,7 @@ namespace knight_text_adventure
             Protagonist protagonist = new Protagonist(chosenName, 5, [sword], castleGrounds);
             protagonist.Take(map);
             InputProcesser.PrintUserManual();
+            ChangeColor("white");
             Console.WriteLine("You can display this menu at any time by entering \"info\". " +
                               "We suggest starting by using the \"explore\" command.");
             Console.WriteLine();
@@ -73,7 +74,7 @@ namespace knight_text_adventure
                 if (protagonist.Room.Npcs != null && protagonist.Room.IsLit)
                 {
                     Fight.FightSequence(protagonist);
-                    if (protagonist.Hp <= 0) break;
+                    if (protagonist.Hp <= 0 || dragon.Hp <= 0) break;
                 }
 
                 ChangeColor("Gray");
@@ -87,7 +88,9 @@ namespace knight_text_adventure
 
                 if (!protagonist.Room.IsLit)
                 {
+                    ChangeColor("yellow");
                     Console.WriteLine("The room is completely dark.");
+                    ChangeColor("white");
                 }
                 
                 ChangeColor("Gray");
@@ -95,6 +98,10 @@ namespace knight_text_adventure
                 ChangeColor("White");
                 string userInput = Console.ReadLine() + " xxx";
                 Console.Clear();
+                if (userInput.Contains("  "))
+                {
+                    continue;
+                }
 
                 string[] userInputArray = userInput.Split(' ');
 
@@ -137,8 +144,8 @@ namespace knight_text_adventure
                 ChangeColor("White");
             }
 
-            string restart = Console.ReadLine() + " ";
-            if (restart.ToLower().StartsWith('Y'))
+            string? restart = Console.ReadLine();
+            if (restart.ToLower().StartsWith('y'))
             {
                 Main();
             }

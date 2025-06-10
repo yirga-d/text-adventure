@@ -44,7 +44,42 @@ namespace knight_text_adventure.Location
                 Console.WriteLine($"{neighbor.Key.ToString()}: {neighbor.Value.Name}");
             }
             */
-            Console.WriteLine($"North: {Neighbors.Values.Where(n => n.Key.ToString() == "North")}");
+            //Console.WriteLine($"North: {Neighbors.Values.Where(n => n.Key.ToString() == "North")}");
+            Console.Write("        ");
+            foreach (var neighbor in Neighbors)
+            {
+                if (neighbor.Key.ToString() == "North")
+                {
+                    Console.Write($"{neighbor.Key.ToString()}:{neighbor.Value.Name}");
+                }
+            }
+            Console.WriteLine("");
+            Console.WriteLine("");
+            foreach (var neighbor in Neighbors)
+            {
+                if (neighbor.Key.ToString() == "West")
+                {
+                    Console.Write($"{neighbor.Key.ToString()}:{neighbor.Value.Name}");
+                }
+            }
+            Console.Write("                            ");
+            foreach (var neighbor in Neighbors)
+            {
+                if (neighbor.Key.ToString() == "East")
+                {
+                    Console.Write($"{neighbor.Key.ToString()}:{neighbor.Value.Name}");
+                }
+            }
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.Write("        ");
+            foreach (var neighbor in Neighbors)
+            {
+                if (neighbor.Key.ToString() == "South")
+                {
+                    Console.WriteLine($"{neighbor.Key.ToString()}:{neighbor.Value.Name}");
+                }
+            }
         }
 
         public void AddNPCs(Npc npc)

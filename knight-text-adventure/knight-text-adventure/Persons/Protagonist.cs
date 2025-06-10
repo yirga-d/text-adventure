@@ -28,6 +28,8 @@ namespace knight_text_adventure.Persons
         {
             bool attackWorked = false;
             int initialHp = enemy.Hp;
+            if (direction == 'T') direction = 'U';
+            if (direction == 'B') direction = 'D';
             foreach (Item item in Inventory)
             {
                 if (item is Sword sword)
@@ -82,6 +84,8 @@ namespace knight_text_adventure.Persons
                 'R' => 'L',
                 _ => '0'
             };
+            if (direction == 'T') direction = 'U';
+            if (direction == 'B') direction = 'D';
             if (direction != correctDodgeDirection)
             {
                 Program.ChangeColor("red");
@@ -144,11 +148,19 @@ namespace knight_text_adventure.Persons
 
         public void Explore()
         {
+            Program.ChangeColor("blue");
             DisplayInventory();
+            Program.ChangeColor("white");
             Console.WriteLine("");
+            Console.WriteLine("_________________________________________");
+            Program.ChangeColor("blue");
             DisplayRoomContent();
+            Program.ChangeColor("white");
             Console.WriteLine("");
+            Console.WriteLine("_________________________________________");
+            Program.ChangeColor("yellow");
             InputProcesser.TriggerMethod(this, "use", "map");
+            Program.ChangeColor("white");
         }
 
 

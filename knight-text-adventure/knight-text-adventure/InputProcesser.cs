@@ -59,7 +59,7 @@ public class InputProcesser
             }
             case "info":
             {
-                if (ValidCommands.Contains(param.ToLower()) == false && param != "nonsense")
+                if (ValidCommands.Contains(param.ToLower()) == false && param != "xxx")
                 {
                     returnValue = false;
                 }
@@ -76,11 +76,13 @@ public class InputProcesser
                 break;
             }
         }
+        /*
 
         if (!returnValue)
         {
             PrintUserManual(commandLower);
         }
+        */
 
         return returnValue;
     }
@@ -143,7 +145,14 @@ public class InputProcesser
                 protagonist.Explore();
                 break;
             case "info":
-                PrintUserManual(protagonist, commandParamString);
+                if (commandParamString != "xxx")
+                {
+                    PrintUserManual(protagonist, commandParamString);
+                }
+                else
+                {
+                    PrintUserManual(commandLower);
+                }
                 break;
             case "take":
                 if (protagonist.Room.Content != null)
@@ -160,7 +169,7 @@ public class InputProcesser
                     if (chosenItem != null)
                     {
                         bool takeWorked = protagonist.Take(chosenItem);
-                        if (!takeWorked)
+                        if (takeWorked)
                         {
                             foreach (Item item in protagonist.Room.Content)
                             {
@@ -202,7 +211,7 @@ public class InputProcesser
                 break;
             case "drop":
             case "use":
-                Console.WriteLine($"The {requestedMethod} can be used with any item in your inventory.");
+                Console.WriteLine($"The {requestedMethod} command can be used with any item in your inventory.");
                 break;
             case "take":
                 Console.WriteLine("The take command can be used with any item in your current room.");
@@ -228,7 +237,7 @@ public class InputProcesser
         Console.WriteLine($"The {requestedMethod} command can be used with any item in your inventory:");
         foreach (var item in protagonist.Inventory)
         {
-            Console.WriteLine("Drop/Use " + item.Name);
+            Console.WriteLine($"{requestedMethod} " + item.Name);
         }
     }
 
@@ -258,7 +267,9 @@ public class InputProcesser
         'U',
         'D',
         'L',
-        'R'
+        'R',
+        'T',
+        'B'
     ];
 
     private static readonly List<string> ValidDropUseParams =
