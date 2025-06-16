@@ -19,6 +19,7 @@ namespace knight_text_adventure
 
             Room forest = new Room("Forest");
             Room castleGrounds = new Room("Castle Grounds");
+            Room storage = new Room("Storage");
             Room workshop = new Room("Workshop");
             Room castleEntrance = new Room("Castle Entrance", locked: true);
             Room hall = new Room("Hall", isLit: false);
@@ -32,11 +33,14 @@ namespace knight_text_adventure
 
             castleGrounds.AddNeighborRoom("North", castleEntrance);
             castleGrounds.AddNeighborRoom("South", forest);
-            castleGrounds.AddNeighborRoom("West", workshop);
+            castleGrounds.AddNeighborRoom("West", storage);
+            castleGrounds.AddNeighborRoom("East", workshop);
             //castleGrounds.AddItem(map);
 
-            workshop.AddNeighborRoom("East", castleGrounds);
-            workshop.AddItem(ram);
+            storage.AddNeighborRoom("East", castleGrounds);
+            storage.AddItem(ram);
+            
+            workshop.AddNeighborRoom("West", castleGrounds);
 
             castleEntrance.AddNeighborRoom("North", hall);
             castleEntrance.AddNeighborRoom("South", castleGrounds);

@@ -114,7 +114,7 @@ public class InputProcesser
             case "dodge":
                 protagonist.Dodge(paramOneChar, threatDirection);
                 break;
-            case "drop" or "use":
+            case "drop" or "use" or "upgrade":
                 foreach (var item in protagonist.Inventory)
                 {
                     if (item.Name.ToLower() == commandParamString.ToLower())
@@ -133,6 +133,13 @@ public class InputProcesser
                 if (commandLower == "drop")
                 {
                     protagonist.Drop(chosenItem);
+                }
+                else if (commandLower == "upgrade")
+                {
+                    if (protagonist.Room.Name == "Workshop")
+                    {
+                        protagonist.Upgrade(chosenItem);
+                    }
                 }
                 else
                 {
@@ -250,6 +257,7 @@ public class InputProcesser
         "explore",
         "info",
         "take",
+        "upgrade",
         "use",
         "walk"
     ];

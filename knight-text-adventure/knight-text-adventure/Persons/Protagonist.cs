@@ -217,6 +217,21 @@ namespace knight_text_adventure.Persons
             }
         }
 
+        public void Upgrade(Item item)
+        {
+            if (item is Sword sword)
+            {
+                UpgradeSword(sword);
+            }
+        }
+
+        public void UpgradeSword(Sword sword)
+        {
+            Console.WriteLine($"Sword before Upgrade: {sword.Damage}");
+            sword.Damage += 3;
+            Console.WriteLine($"Sword after Upgrade: {sword.Damage}");
+        }
+
         public bool Walk(string enteredDirection = "")
         {
             var startRoom = Room;
