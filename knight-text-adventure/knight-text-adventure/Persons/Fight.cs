@@ -10,6 +10,8 @@ public class Fight
         Npc? enemy = protagonist.Room.Npcs;
         if (enemy != null)
         {
+            
+            Program.ChangeColor("yellow");
             Console.WriteLine($"There's a {enemy.Name} in the {protagonist.Room.Name} and it's attacking you.");
             Program.ChangeColor("red");
             Console.Write("Be careful: ");
@@ -59,9 +61,11 @@ public class Fight
             }
 
             Console.Clear();
-            if (protagonist.Hp <= 0)
+            if (protagonist.Hp > 0)
             {
+                Program.ChangeColor("yellow");
                 Console.WriteLine($"Congrats, you killed the {enemy.Name}.");
+                Program.ChangeColor("white");
             }
 
             protagonist.Room.RemoveNpcs();

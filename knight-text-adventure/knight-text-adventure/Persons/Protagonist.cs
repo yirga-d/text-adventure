@@ -28,6 +28,8 @@ namespace knight_text_adventure.Persons
         {
             bool attackWorked = false;
             int initialHp = enemy.Hp;
+            if (direction == 'T') direction = 'U';
+            if (direction == 'B') direction = 'D';
             foreach (Item item in Inventory)
             {
                 if (item is Sword sword)
@@ -82,6 +84,8 @@ namespace knight_text_adventure.Persons
                 'R' => 'L',
                 _ => '0'
             };
+            if (direction == 'T') direction = 'U';
+            if (direction == 'B') direction = 'D';
             if (direction != correctDodgeDirection)
             {
                 Program.ChangeColor("red");
@@ -117,6 +121,18 @@ namespace knight_text_adventure.Persons
                 Console.WriteLine(item.Name);
             }
         }
+
+        public void DisplayRoomContent()
+        {
+            Console.WriteLine("Room Content:");
+            if (Room.Content != null)
+            {
+                foreach (Item item in Room.Content)
+                {
+                    Console.WriteLine(item.Name);
+                }
+            }
+        }
         
         private void DisplayRoomPlan(object s = null)
         {
@@ -132,22 +148,19 @@ namespace knight_text_adventure.Persons
 
         public void Explore()
         {
-            Console.WriteLine("Inventory:");
-            foreach (Item item in Inventory)
-            {
-                Console.WriteLine(item.Name);
-            }
+            Program.ChangeColor("blue");
+            DisplayInventory();
+            Program.ChangeColor("white");
             Console.WriteLine("");
-            Console.WriteLine("Room Content:");
-            if (Room.Content != null)
-            {
-                foreach (Item item in Room.Content)
-                {
-                    Console.WriteLine(item.Name);
-                }
-            }
+            Console.WriteLine("_________________________________________");
+            Program.ChangeColor("blue");
+            DisplayRoomContent();
+            Program.ChangeColor("white");
             Console.WriteLine("");
+            Console.WriteLine("_________________________________________");
+            Program.ChangeColor("yellow");
             InputProcesser.TriggerMethod(this, "use", "map");
+            Program.ChangeColor("white");
         }
 
 
@@ -161,11 +174,12 @@ namespace knight_text_adventure.Persons
             Room.TurnOnTheLight();
         }
 
-        public void Take(Item item)
+        public bool Take(Item item)
         {
             if (Inventory.Count >= 3)
             {
                 Console.WriteLine($"Inventory is already full.\nDrop an item to pick up {item.Name}");
+                return false;
             }
             else
             {
@@ -191,6 +205,7 @@ namespace knight_text_adventure.Persons
                     Lamp thing = (Lamp)item;
                     thing.LampUsing += TurnOn;
                 }
+                return true;
             }
         }
 

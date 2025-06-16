@@ -32,17 +32,53 @@ namespace knight_text_adventure.Location
             if (Direction.Contains(direction))
             {
                 Neighbors.Add(direction, room);
-                return;
             }
-            //error
         }
 
         public void PrintNeighbors()
         {
+            /*
             Console.WriteLine($"You're in the {Name}");
             foreach (var neighbor in Neighbors)
             {
                 Console.WriteLine($"{neighbor.Key.ToString()}: {neighbor.Value.Name}");
+            }
+            */
+            //Console.WriteLine($"North: {Neighbors.Values.Where(n => n.Key.ToString() == "North")}");
+            Console.Write("        ");
+            foreach (var neighbor in Neighbors)
+            {
+                if (neighbor.Key.ToString() == "North")
+                {
+                    Console.Write($"{neighbor.Key.ToString()}:{neighbor.Value.Name}");
+                }
+            }
+            Console.WriteLine("");
+            Console.WriteLine("");
+            foreach (var neighbor in Neighbors)
+            {
+                if (neighbor.Key.ToString() == "West")
+                {
+                    Console.Write($"{neighbor.Key.ToString()}:{neighbor.Value.Name}");
+                }
+            }
+            Console.Write("                            ");
+            foreach (var neighbor in Neighbors)
+            {
+                if (neighbor.Key.ToString() == "East")
+                {
+                    Console.Write($"{neighbor.Key.ToString()}:{neighbor.Value.Name}");
+                }
+            }
+            Console.WriteLine("");
+            Console.WriteLine("");
+            Console.Write("        ");
+            foreach (var neighbor in Neighbors)
+            {
+                if (neighbor.Key.ToString() == "South")
+                {
+                    Console.WriteLine($"{neighbor.Key.ToString()}:{neighbor.Value.Name}");
+                }
             }
         }
 
